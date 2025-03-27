@@ -1,3 +1,57 @@
-[gd_scene format=3 uid="uid://bt8xnyovcbxgo"]
+[gd_scene load_steps=8 format=3 uid="uid://bu3smqchbsyic"]
+
+[ext_resource type="Shader" uid="uid://u2osdbsphxm5" path="res://main.gdshader" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://bqf56jp5tdv4m" path="res://golden_gate_hills_2k.hdr" id="2_0xm2m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0xm2m"]
+render_priority = 0
+shader = ExtResource("1_ig7tw")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 1.0
+shader_parameter/roughness = 0.0
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
+material = SubResource("ShaderMaterial_0xm2m")
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_h2yge"]
+panorama = ExtResource("2_0xm2m")
+
+[sub_resource type="Sky" id="Sky_1bvp3"]
+sky_material = SubResource("PanoramaSkyMaterial_h2yge")
+
+[sub_resource type="Environment" id="Environment_lquwl"]
+background_mode = 2
+background_color = Color(0.890792, 0.626439, 0.480059, 1)
+background_energy_multiplier = 1.7
+sky = SubResource("Sky_1bvp3")
+ambient_light_color = Color(0.903598, 0.903598, 0.903598, 1)
 
 [node name="Main" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.850829, 0, -0.525442, 0, 1, 0, 0.525442, 0, 0.850829, 0, 0, 0)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.84167)
+fov = 84.3962
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lquwl")
