@@ -14,6 +14,10 @@ config/name="BeginnersGameJam"
 run/main_scene="uid://bu3smqchbsyic"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 
+[autoload]
+
+DebugUI="*res://scenes/debug/debug.tscn"
+
 [display]
 
 window/size/viewport_width=1920
@@ -40,11 +44,16 @@ jump={
 
 [layer_names]
 
-3d_render/layer_1="orpheus"
-3d_render/layer_2="eurydice"
-3d_render/layer_3="floor"
+3d_physics/layer_1="orpheus"
+3d_physics/layer_2="eurydice"
+3d_physics/layer_3="character"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
 
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_3d=2

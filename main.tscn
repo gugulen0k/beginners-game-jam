@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bu3smqchbsyic"]
+[gd_scene load_steps=8 format=3 uid="uid://bu3smqchbsyic"]
 
 [ext_resource type="PackedScene" uid="uid://d0k1u5nvwlxh7" path="res://scenes/entities/orpheus/orpheus.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://g7ekiod158lm" path="res://scenes/levels/level_1.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://crawhy8swiqjc" path="res://scenes/entities/characters/characters.gd" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://dsg4uckeyjsey" path="res://scenes/entities/eurydice/eurydice.tscn" id="2_h2yge"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_top_color = Color(0.937343, 0.82717, 0.71197, 1)
@@ -29,11 +31,26 @@ size = 16.495
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lquwl")
 
-[node name="Orpheus" parent="." instance=ExtResource("1_ig7tw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7355, 6.30472, 0.706254)
-
 [node name="Level1" parent="." instance=ExtResource("2_0xm2m")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.4515, 0)
 light_color = Color(0.56953, 0.606005, 0.756581, 1)
+
+[node name="Characters" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.522, 6.35736, 0.115026)
+script = ExtResource("2_1bvp3")
+
+[node name="Orpheus" parent="Characters" instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.555595, -0.306378)
+jump_peak_time = 0.35
+jump_fall_time = 0.45
+jump_height = 4.0
+
+[node name="Eurydice" parent="Characters" instance=ExtResource("2_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.684559, 0.420294, -0.394519)
+jump_peak_time = 0.35
+jump_fall_time = 0.45
+jump_height = 4.0
+
+[editable path="Characters/Orpheus"]

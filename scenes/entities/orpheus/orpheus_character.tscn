@@ -1,0 +1,62 @@
+[gd_scene load_steps=13 format=3 uid="uid://c56t8tudciboh"]
+
+[ext_resource type="PackedScene" uid="uid://chqhqp7bjie4k" path="res://graphics/figurine.glb" id="1_nokot"]
+[ext_resource type="Script" uid="uid://bxu25gy601qxf" path="res://scenes/entities/orpheus/orpheus_character.gd" id="2_8wrb6"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8wrb6"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nokot"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_orb2c"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vf43g"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pt25o"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8wrb6"]
+states/idle/node = SubResource("AnimationNodeAnimation_8wrb6")
+states/idle/position = Vector2(339, 100)
+states/walk/node = SubResource("AnimationNodeAnimation_nokot")
+states/walk/position = Vector2(506, 100)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_orb2c"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_vf43g"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_pt25o")]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8wrb6"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_orb2c"]
+material = SubResource("StandardMaterial3D_8wrb6")
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_orb2c"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pt25o"]
+material = SubResource("StandardMaterial3D_orb2c")
+size = Vector3(0.05, 0.05, 0.25)
+
+[node name="OrpheusCharacter" instance=ExtResource("1_nokot")]
+script = ExtResource("2_8wrb6")
+
+[node name="figurine" parent="." index="0"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="leg-left" parent="figurine/root" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.25, 1.49019e-09)
+
+[node name="leg-right" parent="figurine/root" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.3, -1.82787e-09)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeStateMachine_8wrb6")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="DirectionArrow" type="Node3D" parent="." index="3"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.887432, -0.0461933)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="DirectionArrow" index="0"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, 0.0930299)
+mesh = SubResource("PrismMesh_orb2c")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="DirectionArrow" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.082344)
+mesh = SubResource("BoxMesh_pt25o")
