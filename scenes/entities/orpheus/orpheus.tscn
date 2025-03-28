@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0k1u5nvwlxh7"]
+
+[ext_resource type="Shader" uid="uid://u2osdbsphxm5" path="res://shaders/prototype.gdshader" id="1_0bnwn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jpkvy"]
+render_priority = 0
+shader = ExtResource("1_0bnwn")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0.798177, 0.668048, 0.497777, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.0
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 0.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = true
+shader_parameter/checkered_color = Color(0.103744, 0.103744, 0.103743, 1)
+shader_parameter/checkered_blend_color = 0.3
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bdx86"]
+material = SubResource("ShaderMaterial_jpkvy")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0bnwn"]
+
+[node name="Orpheus" type="CharacterBody3D"]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+mesh = SubResource("CapsuleMesh_bdx86")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_0bnwn")
