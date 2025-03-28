@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://g7ekiod158lm"]
+[gd_scene load_steps=18 format=3 uid="uid://g7ekiod158lm"]
 
+[ext_resource type="Script" uid="uid://btga3hxw4vogx" path="res://scenes/levels/level_1.gd" id="1_6iamk"]
 [ext_resource type="Shader" uid="uid://u2osdbsphxm5" path="res://shaders/prototype.gdshader" id="1_ksju7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6iamk"]
@@ -66,6 +67,9 @@ shader_parameter/albedo_alpha = 0.5
 material = SubResource("ShaderMaterial_6761a")
 size = Vector3(3, 0.5, 2.5)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ksju7"]
+size = Vector3(3, 0.5, 2.5)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oc4kc"]
 render_priority = 0
 shader = ExtResource("1_ksju7")
@@ -94,9 +98,33 @@ shader_parameter/albedo_alpha = 0.5
 material = SubResource("ShaderMaterial_oc4kc")
 size = Vector3(3, 1, 2.5)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nsrm0"]
+render_priority = 0
+shader = ExtResource("1_ksju7")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0.567542, 0.287249, 0.753157, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 5.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 10.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = true
+shader_parameter/checkered_color = Color(0.321728, 0.321728, 0.321728, 1)
+shader_parameter/checkered_blend_color = 0.66
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
 [sub_resource type="BoxMesh" id="BoxMesh_6761a"]
-material = SubResource("ShaderMaterial_oc4kc")
-size = Vector3(9.58, 1, 2.5)
+material = SubResource("ShaderMaterial_nsrm0")
+size = Vector3(11.015, 1, 2.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_dga24"]
 material = SubResource("ShaderMaterial_oc4kc")
@@ -135,67 +163,93 @@ material = SubResource("ShaderMaterial_ksju7")
 size = Vector3(28, 16.06, 1)
 
 [node name="Level1" type="Node3D"]
+script = ExtResource("1_6iamk")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 use_collision = true
+collision_layer = 4
+collision_mask = 0
 mesh = SubResource("BoxMesh_nsrm0")
 
 [node name="CSGMesh3D5" type="CSGMesh3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5511, 4.80472, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5511, 3.46429, 0)
 use_collision = true
+collision_layer = 4
+collision_mask = 0
 mesh = SubResource("BoxMesh_6iamk")
 
 [node name="CSGMesh3D7" type="CSGMesh3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.54888, 4.80472, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.54888, 3.46429, 0)
 use_collision = true
+collision_layer = 4
+collision_mask = 0
 mesh = SubResource("BoxMesh_x42e6")
 
 [node name="CSGMesh3D9" type="CSGMesh3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.47868, 4.80472, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.47868, 3.46429, 0)
 use_collision = true
+collision_layer = 4
+collision_mask = 0
 mesh = SubResource("BoxMesh_x42e6")
 
-[node name="CSGMesh3D11" type="CSGMesh3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.47868, 5.53423, 0)
-use_collision = true
+[node name="FinishZone" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.47868, 4.1938, 0)
 mesh = SubResource("BoxMesh_sk5k4")
 
+[node name="Area3D" type="Area3D" parent="FinishZone"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FinishZone/Area3D"]
+shape = SubResource("BoxShape3D_ksju7")
+
 [node name="CSGMesh3D6" type="CSGMesh3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.54523, 4.80472, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.54523, 3.46429, 0)
 use_collision = true
+collision_mask = 0
 mesh = SubResource("BoxMesh_s8va5")
 
 [node name="CSGMesh3D12" type="CSGMesh3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.416664, 10.1105, 0)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.416664, 9.45495, 0)
 use_collision = true
+collision_layer = 2
+collision_mask = 0
 mesh = SubResource("BoxMesh_6761a")
 
 [node name="CSGMesh3D8" type="CSGMesh3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9526, 4.80472, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9526, 3.46429, 0)
 use_collision = true
+collision_mask = 0
 mesh = SubResource("BoxMesh_dga24")
 
 [node name="CSGMesh3D10" type="CSGMesh3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9943, 4.80472, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9943, 3.46429, 0)
 use_collision = true
+collision_mask = 0
 mesh = SubResource("BoxMesh_dga24")
 
 [node name="CSGMesh3D3" type="CSGMesh3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.4142, 0)
 use_collision = true
+collision_layer = 4
+collision_mask = 0
 mesh = SubResource("BoxMesh_nsrm0")
 
 [node name="CSGMesh3D2" type="CSGMesh3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 14.4876, 7.46807, 0)
 use_collision = true
+collision_layer = 4
+collision_mask = 0
 mesh = SubResource("BoxMesh_ksju7")
 
 [node name="CSGMesh3D4" type="CSGMesh3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -14.5001, 7.46807, 0)
 use_collision = true
+collision_layer = 4
+collision_mask = 0
 mesh = SubResource("BoxMesh_ksju7")
 
 [node name="CSGMesh3D13" type="CSGMesh3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.72294, -1.75014)
 mesh = SubResource("BoxMesh_oc4kc")
+
+[connection signal="body_entered" from="FinishZone/Area3D" to="." method="_on_area_3d_body_entered"]
