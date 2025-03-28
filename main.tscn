@@ -1,57 +1,39 @@
-[gd_scene load_steps=8 format=3 uid="uid://bu3smqchbsyic"]
+[gd_scene load_steps=6 format=3 uid="uid://bu3smqchbsyic"]
 
-[ext_resource type="Shader" uid="uid://u2osdbsphxm5" path="res://main.gdshader" id="1_ig7tw"]
-[ext_resource type="Texture2D" uid="uid://bqf56jp5tdv4m" path="res://golden_gate_hills_2k.hdr" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://d0k1u5nvwlxh7" path="res://scenes/entities/orpheus/orpheus.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://g7ekiod158lm" path="res://scenes/levels/level_1.tscn" id="2_0xm2m"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0xm2m"]
-render_priority = 0
-shader = ExtResource("1_ig7tw")
-shader_parameter/world_uv = false
-shader_parameter/object_uv = false
-shader_parameter/object_uv_scale = Vector2(1, 1)
-shader_parameter/preset_color = 0
-shader_parameter/base_color = Color(0, 0, 0, 1)
-shader_parameter/metalic = 1.0
-shader_parameter/roughness = 0.0
-shader_parameter/grid_scale = 1.0
-shader_parameter/grid_width = 0.01
-shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
-shader_parameter/inside_scale = 1.0
-shader_parameter/inside_width = 0.01
-shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
-shader_parameter/checkered = true
-shader_parameter/sub_checkered_grid = false
-shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
-shader_parameter/checkered_blend_color = 0.1
-shader_parameter/use_inside_uv = false
-shader_parameter/use_albedo_color = false
-shader_parameter/albedo_alpha = 0.5
-
-[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
-material = SubResource("ShaderMaterial_0xm2m")
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_h2yge"]
-panorama = ExtResource("2_0xm2m")
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
+sky_top_color = Color(0.937343, 0.82717, 0.71197, 1)
+sky_horizon_color = Color(0.175814, 0.208016, 0.354428, 1)
+sky_curve = 0.113679
+ground_bottom_color = Color(0.176471, 0.207843, 0.352941, 1)
+ground_horizon_color = Color(0.176471, 0.207843, 0.352941, 1)
 
 [sub_resource type="Sky" id="Sky_1bvp3"]
-sky_material = SubResource("PanoramaSkyMaterial_h2yge")
+sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
 
 [sub_resource type="Environment" id="Environment_lquwl"]
 background_mode = 2
-background_color = Color(0.890792, 0.626439, 0.480059, 1)
-background_energy_multiplier = 1.7
+background_color = Color(0.670804, 0.557878, 0.508364, 1)
 sky = SubResource("Sky_1bvp3")
-ambient_light_color = Color(0.903598, 0.903598, 0.903598, 1)
+fog_sun_scatter = 0.8
 
 [node name="Main" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.850829, 0, -0.525442, 0, 1, 0, 0.525442, 0, 0.850829, 0, 0, 0)
-mesh = SubResource("BoxMesh_h2yge")
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.84167)
-fov = 84.3962
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.43801, 39.0979)
+fov = 25.0
+size = 16.495
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lquwl")
+
+[node name="Orpheus" parent="." instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7355, 6.30472, 0.706254)
+
+[node name="Level1" parent="." instance=ExtResource("2_0xm2m")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.4515, 0)
+light_color = Color(0.56953, 0.606005, 0.756581, 1)
