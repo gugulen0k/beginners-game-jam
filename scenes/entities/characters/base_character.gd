@@ -2,13 +2,16 @@ class_name Character
 
 extends CharacterBody3D
 
-signal jump_now
-
 @export_category('Character parameters')
+
+@export_category('Jumping')
 @export var jump_peak_time: float = 0.5
 @export var jump_fall_time: float = 0.5
 @export var jump_height: float = 2.0
 @export var jump_distance: float = 4.0
+
+@export_category('Rotation')
+@export var rotation_speed: float = 8.0
 
 var movement_speed: float
 var jump_velocity: float
@@ -21,7 +24,7 @@ var fall_gravity: float
 
 func _ready() -> void:
 	calculate_movement_parameters()
-	#jump_now.connect()
+	transform.basis = Basis.looking_at(Vector3.RIGHT)
 
 
 func calculate_movement_parameters() -> void:
@@ -31,13 +34,28 @@ func calculate_movement_parameters() -> void:
 	movement_speed = jump_distance / (jump_peak_time + jump_fall_time)
 
 
-func move() -> void:
+func handle_movement() -> void:
 	velocity.x = movement_direction * movement_speed
+
 
 func can_move() -> bool:
 	return is_able_to_move
 
-func jump(delta: float) -> void:
+
+func is_moving() -> bool:
+	if movement_direction: return true
+	
+	return false
+
+func update_direction(direction: float) -> void:
+	movement_direction = direction
+
+
+func stop() -> void:
+	velocity.x = 0
+
+
+func handle_jumping(delta: float) -> void:
 	if not is_on_floor():
 		if velocity.y > 0:
 			velocity.y -= jump_gravity * delta
@@ -47,11 +65,16 @@ func jump(delta: float) -> void:
 		
 	if Input.is_action_just_pressed('jump') and is_on_floor():
 		velocity.y = jump_velocity
+		
 
-
-func stop() -> void:
-	velocity.x = 0
-
-
-func update_direction(direction: float) -> void:
-	movement_direction = direction
+func handle_rotation(delta: float) -> void:
+	if movement_direction:
+		var direction_vector := Vector3(movement_direction, 0, 0)
+		
+		transform.basis = Basis.looking_at(direction_vector)
+		
+		#var current_rotation: Quaternion = Quaternion(transform.basis).normalized()
+		#var direction_vector := Vector3(movement_direction, 0, 0)
+		#var looking_direction: Quaternion = Quaternion(Basis.looking_at(direction_vector)).normalized()
+		#var target_rotation = current_rotation.slerp(looking_direction, rotation_speed * delta)
+		#transform.basis = Basis(target_rotation)

@@ -4,8 +4,9 @@ func _physics_process(delta: float) -> void:
 	DebugUI.add_property('Eurydice velocity y', velocity.y)
 	
 	if can_move():
-		move()
-		jump(delta)
+		handle_movement()
+		handle_jumping(delta)
+		handle_rotation(delta)
 	else:
 		stop()
 		

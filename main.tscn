@@ -38,18 +38,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.4515, 0)
 light_color = Color(0.56953, 0.606005, 0.756581, 1)
 
 [node name="Characters" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.522, 6.35736, 0.115026)
 script = ExtResource("2_1bvp3")
 
-[node name="Eurydice" parent="Characters" instance=ExtResource("2_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3315, 5.25337, -1.22197)
-jump_peak_time = 0.35
-jump_fall_time = 0.45
-jump_height = 4.0
-jump_distance = 5.0
-
 [node name="Orpheus" parent="Characters" instance=ExtResource("1_ig7tw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.2062, 4.97337, 0.706254)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.555595, -0.306378)
 jump_peak_time = 0.35
 jump_fall_time = 0.45
 jump_height = 4.0
-jump_distance = 5.0
+
+[node name="Eurydice" parent="Characters" instance=ExtResource("2_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.684559, 0.420294, -0.394519)
+jump_peak_time = 0.35
+jump_fall_time = 0.45
+jump_height = 4.0
+
+[editable path="Characters/Orpheus"]

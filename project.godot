@@ -44,9 +44,6 @@ jump={
 
 [layer_names]
 
-3d_render/layer_1="orpheus"
-3d_render/layer_2="eurydice"
-3d_render/layer_3="floor"
 3d_physics/layer_1="orpheus"
 3d_physics/layer_2="eurydice"
 3d_physics/layer_3="character"
