@@ -47,6 +47,7 @@ jump={
 3d_physics/layer_1="orpheus"
 3d_physics/layer_2="eurydice"
 3d_physics/layer_3="character"
+3d_physics/layer_4="raycast_hittable"
 
 [physics]
 

@@ -17,6 +17,7 @@ var movement_speed: float
 var jump_velocity: float
 var movement_direction: float
 var is_able_to_move: bool = true
+var old_movement_direction: float
 
 var jump_gravity = ProjectSettings.get_setting('physics/3d/default_gravity')
 var fall_gravity: float
@@ -67,14 +68,16 @@ func handle_jumping(delta: float) -> void:
 		velocity.y = jump_velocity
 		
 
-func handle_rotation(delta: float) -> void:
-	if movement_direction:
-		var direction_vector := Vector3(movement_direction, 0, 0)
-		
-		transform.basis = Basis.looking_at(direction_vector)
-		
-		#var current_rotation: Quaternion = Quaternion(transform.basis).normalized()
+# This function is overriden because it functions differently for each character
+func handle_rotation() -> void:
+	pass
+	# DONT USE TRANSFORM BASIS, IT MESSES UP THE RAYCAST MARKER POSITIONS
+	#if movement_direction:
 		#var direction_vector := Vector3(movement_direction, 0, 0)
-		#var looking_direction: Quaternion = Quaternion(Basis.looking_at(direction_vector)).normalized()
-		#var target_rotation = current_rotation.slerp(looking_direction, rotation_speed * delta)
-		#transform.basis = Basis(target_rotation)
+		#transform.basis = Basis.looking_at(direction_vector)
+		
+	#var current_rotation: Quaternion = Quaternion(transform.basis).normalized()
+	#var direction_vector := Vector3(movement_direction, 0, 0)
+	#var looking_direction: Quaternion = Quaternion(Basis.looking_at(direction_vector)).normalized()
+	#var target_rotation = current_rotation.slerp(looking_direction, rotation_speed * delta)
+	#transform.basis = Basis(target_rotation)

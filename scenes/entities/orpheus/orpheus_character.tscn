@@ -38,7 +38,7 @@ size = Vector3(0.05, 0.05, 0.25)
 script = ExtResource("2_8wrb6")
 
 [node name="figurine" parent="." index="0"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="leg-left" parent="figurine/root" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.25, 1.49019e-09)
@@ -51,7 +51,7 @@ tree_root = SubResource("AnimationNodeStateMachine_8wrb6")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="DirectionArrow" type="Node3D" parent="." index="3"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.887432, -0.0461933)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.887432, -0.0461933)
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="DirectionArrow" index="0"]
 transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, 0.0930299)
