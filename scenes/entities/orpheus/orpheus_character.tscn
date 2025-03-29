@@ -38,7 +38,7 @@ size = Vector3(0.05, 0.05, 0.25)
 script = ExtResource("2_8wrb6")
 
 [node name="figurine" parent="." index="0"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="leg-left" parent="figurine/root" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.25, 1.49019e-09)
@@ -46,12 +46,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.25, 1.49019e-09)
 [node name="leg-right" parent="figurine/root" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.3, -1.82787e-09)
 
+[node name="torso" parent="figurine/root" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.997754, -0.0669798, 0, 0.0669798, 0.997754, 0, 0.25, 0)
+
+[node name="arm-left" parent="figurine/root/torso" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.979849, -0.199737, 0, 0.199737, 0.979849, 0.2, 0.2, 5.62298e-09)
+
+[node name="arm-right" parent="figurine/root/torso" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.979849, -0.199737, 0, 0.199737, 0.979849, -0.2, 0.2, -2.94549e-09)
+
+[node name="head" parent="figurine/root/torso" index="2"]
+transform = Transform3D(0.979849, 0, -0.199737, 0, 1, 0, 0.199737, 0, 0.979849, 0, 0.25, 0)
+
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeStateMachine_8wrb6")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="DirectionArrow" type="Node3D" parent="." index="3"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.887432, -0.0461933)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.887432, -0.0461933)
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="DirectionArrow" index="0"]
 transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, 0.0930299)

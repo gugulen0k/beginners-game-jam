@@ -203,7 +203,7 @@ mesh = SubResource("BoxMesh_sk5k4")
 shape = SubResource("BoxShape3D_ksju7")
 
 [node name="Marker3D" type="Marker3D" parent="FinishZone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0583782, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.250959, 0)
 
 [node name="CSGMesh3D6" type="CSGMesh3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.54523, 4.38338, 0)

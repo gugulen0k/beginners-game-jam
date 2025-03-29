@@ -6,9 +6,10 @@ extends Character
 @onready var raycasts_origin: Marker3D = $RaycastMarkers/RaycastsOrigin
 @onready var gaze_cone_start: Marker3D = $RaycastMarkers/GazeConeStart
 @onready var gaze_cone_end: Marker3D = $RaycastMarkers/GazeConeEnd
+@onready var raycast_markers: Node3D = $RaycastMarkers
 
-const RAY_LENGTH: int = 40
-const RAYS_COUNT: int = 100
+const RAY_LENGTH: int = 50
+const RAYS_COUNT: int = 50
 const SETTLE_ANIMATION_SPEED: float = 2
 
 func _physics_process(delta: float) -> void:
@@ -16,7 +17,7 @@ func _physics_process(delta: float) -> void:
 	DebugUI.add_property('Orpheus movement direction', movement_direction)
 	DebugUI.add_property('Orpheus anim state', orpheus_character.get_anim_state())
 	
-	if can_move():
+	if can_perform_actions():
 		handle_movement()
 		handle_jumping(delta)
 		handle_rotation()
@@ -88,6 +89,7 @@ func detect_eurydice() -> void:
 		var ray_end_position = ray_start_position + interpolated_ray_direction * RAY_LENGTH
 		
 		var query = PhysicsRayQueryParameters3D.create(ray_start_position, ray_end_position, CollisionLayers.RAYCAST_HITTABLE)
+		query.hit_from_inside = true
 		
 		var result := space_state.intersect_ray(query)
 		# for seeing the ray
@@ -103,23 +105,24 @@ func detect_eurydice() -> void:
 	#print(result)
 	
 func move_into_final_area_position(marker_3d: Marker3D) -> void:
+	InputSystem.can_use_orpheus = false
+	InputSystem.can_use_eurydice = false
+	
 	var tween = get_tree().create_tween()
 	# will change the global position to the marker 3d global position over the SETTLE_ANIMATION_SPEED in seconds
-	tween.tween_property(self, "global_position", marker_3d.global_position, SETTLE_ANIMATION_SPEED)
+	tween.tween_property(self, "global_position", marker_3d.global_position + (global_position - $Feet.global_position), SETTLE_ANIMATION_SPEED)
 	
 	# Use the tween's finished callback for the actions after the movement
 	tween.finished.connect(on_move_into_final_area_finished)
 	
 func on_move_into_final_area_finished() -> void:
-	# insert code here to make character look left, current implementation is sus
-	# DONT USE TRANSFORM BASIS, IT MESSES UP THE RAYCAST MARKER POSITIONS
-	
-	# temporary way to make raycast cone look left
-	$RaycastMarkers.rotation_degrees.y = 270
-	
+	transform.basis = transform.basis.rotated(Vector3.UP, PI)
 	orpheus_character.set_anim_state('idle')
+	
+	InputSystem.can_use_eurydice = true
+	InputSystem.can_use_orpheus = false
 
 func handle_rotation() -> void:
-	# Implement this logic the character body and animations are setup properly
-	# DONT USE TRANSFORM BASIS, IT MESSES UP THE RAYCAST MARKER POSITIONS, VERY SUS!
-	pass
+	if movement_direction:
+		transform.basis = Basis.looking_at(Vector3(movement_direction, 0, 0))
+	

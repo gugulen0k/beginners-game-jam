@@ -16,8 +16,16 @@ extends CharacterBody3D
 var movement_speed: float
 var jump_velocity: float
 var movement_direction: float
-var is_able_to_move: bool = true
 var old_movement_direction: float
+var is_able_to_perform_actions: bool
+var is_jumping: bool = false
+
+enum State { IDLE, WALKING, JUMPING, FALLING, LANDING }
+var current_state: State = State.IDLE
+var previous_state: State = State.IDLE
+var was_on_floor: bool = true
+var just_landed: bool = false  # New flag for landing detection
+var is_in_landing_animation: bool = false  # Track if we're in landing animation
 
 var jump_gravity = ProjectSettings.get_setting('physics/3d/default_gravity')
 var fall_gravity: float
@@ -26,6 +34,12 @@ var fall_gravity: float
 func _ready() -> void:
 	calculate_movement_parameters()
 	transform.basis = Basis.looking_at(Vector3.RIGHT)
+
+
+func _physics_process(delta: float) -> void:
+	previous_state = current_state
+	update_state()
+	was_on_floor = is_on_floor()
 
 
 func calculate_movement_parameters() -> void:
@@ -39,45 +53,51 @@ func handle_movement() -> void:
 	velocity.x = movement_direction * movement_speed
 
 
-func can_move() -> bool:
-	return is_able_to_move
+func can_perform_actions() -> bool:
+	return is_able_to_perform_actions
 
 
 func is_moving() -> bool:
-	if movement_direction: return true
-	
-	return false
+	return abs(movement_direction) > 0.1  # Add small threshold to prevent flickering
+
 
 func update_direction(direction: float) -> void:
 	movement_direction = direction
+
+
+func jumping(value: bool) -> void:
+	is_jumping = value
 
 
 func stop() -> void:
 	velocity.x = 0
 
 
+func update_state() -> void:
+	if is_in_landing_animation:
+		return  # Don't change state during landing animation
+	
+	if not is_on_floor():
+		if velocity.y > 0:
+			current_state = State.JUMPING
+		else:
+			current_state = State.FALLING
+	elif not was_on_floor and is_on_floor():
+		current_state = State.LANDING
+	elif is_moving():
+		current_state = State.WALKING
+	else:
+		current_state = State.IDLE
+
 func handle_jumping(delta: float) -> void:
+	if not is_able_to_perform_actions:
+		return
+
 	if not is_on_floor():
 		if velocity.y > 0:
 			velocity.y -= jump_gravity * delta
 		else:
 			velocity.y -= fall_gravity * delta
-	
 		
-	if Input.is_action_just_pressed('jump') and is_on_floor():
+	if is_jumping and is_on_floor():
 		velocity.y = jump_velocity
-		
-
-# This function is overriden because it functions differently for each character
-func handle_rotation() -> void:
-	pass
-	# DONT USE TRANSFORM BASIS, IT MESSES UP THE RAYCAST MARKER POSITIONS
-	#if movement_direction:
-		#var direction_vector := Vector3(movement_direction, 0, 0)
-		#transform.basis = Basis.looking_at(direction_vector)
-		
-	#var current_rotation: Quaternion = Quaternion(transform.basis).normalized()
-	#var direction_vector := Vector3(movement_direction, 0, 0)
-	#var looking_direction: Quaternion = Quaternion(Basis.looking_at(direction_vector)).normalized()
-	#var target_rotation = current_rotation.slerp(looking_direction, rotation_speed * delta)
-	#transform.basis = Basis(target_rotation)
