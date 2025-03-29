@@ -46,6 +46,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.25, 1.49019e-09)
 [node name="leg-right" parent="figurine/root" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.3, -1.82787e-09)
 
+[node name="torso" parent="figurine/root" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.997754, -0.0669798, 0, 0.0669798, 0.997754, 0, 0.25, 0)
+
+[node name="arm-left" parent="figurine/root/torso" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.979849, -0.199737, 0, 0.199737, 0.979849, 0.2, 0.2, 5.62298e-09)
+
+[node name="arm-right" parent="figurine/root/torso" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.979849, -0.199737, 0, 0.199737, 0.979849, -0.2, 0.2, -2.94549e-09)
+
+[node name="head" parent="figurine/root/torso" index="2"]
+transform = Transform3D(0.979849, 0, -0.199737, 0, 1, 0, 0.199737, 0, 0.979849, 0, 0.25, 0)
+
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeStateMachine_8wrb6")
 anim_player = NodePath("../AnimationPlayer")

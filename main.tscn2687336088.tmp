@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://bu3smqchbsyic"]
+
+[ext_resource type="PackedScene" uid="uid://d0k1u5nvwlxh7" path="res://scenes/entities/orpheus/orpheus.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://g7ekiod158lm" path="res://scenes/levels/level_1.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://crawhy8swiqjc" path="res://scenes/entities/characters/characters.gd" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://dsg4uckeyjsey" path="res://scenes/entities/eurydice/eurydice.tscn" id="2_h2yge"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
+sky_top_color = Color(0.937343, 0.82717, 0.71197, 1)
+sky_horizon_color = Color(0.175814, 0.208016, 0.354428, 1)
+sky_curve = 0.113679
+ground_bottom_color = Color(0.176471, 0.207843, 0.352941, 1)
+ground_horizon_color = Color(0.176471, 0.207843, 0.352941, 1)
+
+[sub_resource type="Sky" id="Sky_1bvp3"]
+sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
+
+[sub_resource type="Environment" id="Environment_lquwl"]
+background_mode = 2
+background_color = Color(0.670804, 0.557878, 0.508364, 1)
+sky = SubResource("Sky_1bvp3")
+fog_sun_scatter = 0.8
+
+[node name="Main" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.43801, 39.0979)
+fov = 25.0
+size = 16.495
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lquwl")
+
+[node name="Level1" parent="." instance=ExtResource("2_0xm2m")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.4515, 0)
+light_color = Color(0.56953, 0.606005, 0.756581, 1)
+
+[node name="Characters" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.522, 6.35736, 0.115026)
+script = ExtResource("2_1bvp3")
+
+[node name="Orpheus" parent="Characters" instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.555595, -0.306378)
+jump_peak_time = 0.35
+jump_fall_time = 0.45
+jump_height = 4.0
+jump_distance = 4.0
+rotation_speed = 8.0
+
+[node name="RaycastMarkers" parent="Characters/Orpheus" index="2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="RaycastsOrigin" parent="Characters/Orpheus/RaycastMarkers" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0501604, 0.499286, 0)
+
+[node name="GazeConeStart" parent="Characters/Orpheus/RaycastMarkers" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82275, 4.09051, 0)
+
+[node name="GazeConeEnd" parent="Characters/Orpheus/RaycastMarkers" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38461, -2.73618, 0)
+
+[node name="Eurydice" parent="Characters" instance=ExtResource("2_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.684559, 0.420294, -0.394519)
+jump_peak_time = 0.35
+jump_fall_time = 0.45
+jump_height = 4.0
+
+[editable path="Characters/Orpheus"]

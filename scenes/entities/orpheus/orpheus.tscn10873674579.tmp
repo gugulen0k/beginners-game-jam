@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0k1u5nvwlxh7"]
+
+[ext_resource type="Script" uid="uid://dva08t1ymq557" path="res://scenes/entities/orpheus/orpheus.gd" id="1_jpkvy"]
+[ext_resource type="PackedScene" uid="uid://c56t8tudciboh" path="res://scenes/entities/orpheus/orpheus_character.tscn" id="2_i7erg"]
+[ext_resource type="Shape3D" uid="uid://gvf2nvbapqs4" path="res://scenes/entities/characters/character_collision_shape.tres" id="3_bdx86"]
+
+[node name="Orpheus" type="CharacterBody3D"]
+collision_mask = 5
+script = ExtResource("1_jpkvy")
+jump_peak_time = null
+jump_fall_time = null
+jump_height = null
+jump_distance = null
+rotation_speed = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = ExtResource("3_bdx86")
+
+[node name="OrpheusCharacter" parent="." instance=ExtResource("2_i7erg")]
+transform = Transform3D(2.46, 0, 0, 0, 2.46, 0, 0, 0, 2.46, 0, -0.877495, 0)
+
+[node name="RaycastsOrigin" type="Marker3D" parent="."]
+
+[node name="GazeConeStart" type="Marker3D" parent="."]
+
+[node name="GazeConeEnd" type="Marker3D" parent="."]

@@ -45,12 +45,10 @@ script = ExtResource("2_1bvp3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.555595, -0.306378)
 jump_peak_time = 0.35
 jump_fall_time = 0.45
-jump_height = 4.0
+jump_height = 6.0
 
 [node name="Eurydice" parent="Characters" instance=ExtResource("2_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.684559, 0.420294, -0.394519)
 jump_peak_time = 0.35
 jump_fall_time = 0.45
-jump_height = 4.0
-
-[editable path="Characters/Orpheus"]
+jump_height = 6.0

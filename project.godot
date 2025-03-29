@@ -16,7 +16,8 @@ config/features=PackedStringArray("4.4", "GL Compatibility")
 
 [autoload]
 
-DebugUI="*res://scenes/debug/debug.tscn"
+DebugUI="*res://global_scripts/debug/debug.tscn"
+InputSystem="*res://global_scripts/input_system.gd"
 
 [display]
 
@@ -47,6 +48,7 @@ jump={
 3d_physics/layer_1="orpheus"
 3d_physics/layer_2="eurydice"
 3d_physics/layer_3="character"
+3d_physics/layer_4="raycast_hittable"
 
 [physics]
 
