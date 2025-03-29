@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwe3x2aa4nigr"]
+
+[ext_resource type="Theme" uid="uid://bcrem83sv3sbs" path="res://scenes/user interface/global/main_theme.tres" id="1_301bl"]
+[ext_resource type="Script" uid="uid://bj0no7kyf7c12" path="res://scenes/user interface/level_selection/level_selection.gd" id="2_6am1q"]
+[ext_resource type="Theme" uid="uid://bpldfnfn5cise" path="res://scenes/user interface/level_selection/level_selection_theme.tres" id="2_7xb6c"]
+[ext_resource type="PackedScene" uid="uid://dmtjj6algm8d2" path="res://scenes/user interface/loading_screen/loading_screen.tscn" id="3_14bf4"]
+[ext_resource type="Script" uid="uid://bpn2mrsk13xwt" path="res://scenes/user interface/level_selection/level_select_button.gd" id="3_dtepf"]
+[ext_resource type="PackedScene" uid="uid://g7ekiod158lm" path="res://scenes/levels/level_1.tscn" id="4_8h20x"]
+[ext_resource type="PackedScene" uid="uid://bu3smqchbsyic" path="res://main.tscn" id="6_ichdu"]
+
+[node name="LevelSelection" type="Control" node_paths=PackedStringArray("buttons")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_301bl")
+script = ExtResource("2_6am1q")
+loading_screen_packed_scene = ExtResource("3_14bf4")
+buttons = [NodePath("MarginContainer/VSplitContainer/CenterContainer/HorizontalFlowContainer/Button"), NodePath("MarginContainer/VSplitContainer/CenterContainer/HorizontalFlowContainer/Button2"), NodePath("MarginContainer/VSplitContainer/CenterContainer/HorizontalFlowContainer/Button3")]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
+layout_mode = 2
+split_offset = 200
+dragging_enabled = false
+
+[node name="Label" type="Label" parent="MarginContainer/VSplitContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "BIG WORDSSWSDSAOgnweoing"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VSplitContainer"]
+layout_mode = 2
+
+[node name="HorizontalFlowContainer" type="GridContainer" parent="MarginContainer/VSplitContainer/CenterContainer"]
+layout_mode = 2
+theme = ExtResource("2_7xb6c")
+theme_override_constants/h_separation = 20
+columns = 3
+
+[node name="Button" type="Button" parent="MarginContainer/VSplitContainer/CenterContainer/HorizontalFlowContainer"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Level 1"
+script = ExtResource("3_dtepf")
+level_scene = ExtResource("6_ichdu")
+
+[node name="Button2" type="Button" parent="MarginContainer/VSplitContainer/CenterContainer/HorizontalFlowContainer"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Level 2"
+script = ExtResource("3_dtepf")
+level_scene = ExtResource("4_8h20x")
+
+[node name="Button3" type="Button" parent="MarginContainer/VSplitContainer/CenterContainer/HorizontalFlowContainer"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Level 3"
+script = ExtResource("3_dtepf")
+level_scene = ExtResource("4_8h20x")

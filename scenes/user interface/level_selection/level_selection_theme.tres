@@ -1,0 +1,32 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bpldfnfn5cise"]
+
+[ext_resource type="FontFile" uid="uid://ducgl27pcrf36" path="res://scenes/user interface/global/fonts/caesar-dressing/CaesarDressing-B153.ttf" id="1_gfuji"]
+[ext_resource type="Texture2D" uid="uid://blmvkqfd2qpnc" path="res://scenes/user interface/level_selection/buttons/greek_buttons.png" id="2_i041v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbnyw"]
+atlas = ExtResource("2_i041v")
+region = Rect2(-6.51802, 1242.66, 1064.89, 532.035)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i041v"]
+texture = SubResource("AtlasTexture_bbnyw")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bbnyw"]
+texture = SubResource("AtlasTexture_bbnyw")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5f4c5"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+texture = SubResource("AtlasTexture_bbnyw")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fnwbq"]
+texture = SubResource("AtlasTexture_bbnyw")
+
+[resource]
+Button/fonts/font = ExtResource("1_gfuji")
+Button/styles/disabled = null
+Button/styles/focus = SubResource("StyleBoxTexture_i041v")
+Button/styles/hover = SubResource("StyleBoxTexture_bbnyw")
+Button/styles/normal = SubResource("StyleBoxTexture_5f4c5")
+Button/styles/pressed = SubResource("StyleBoxTexture_fnwbq")

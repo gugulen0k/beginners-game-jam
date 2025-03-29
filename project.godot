@@ -11,18 +11,20 @@ config_version=5
 [application]
 
 config/name="BeginnersGameJam"
-run/main_scene="uid://bu3smqchbsyic"
+run/main_scene="uid://bbykm8vsbwsv5"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 
 [autoload]
 
 DebugUI="*res://global_scripts/debug/debug.tscn"
 InputSystem="*res://global_scripts/input_system.gd"
+SceneLoading="*res://global_scripts/scene_loading.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/always_on_top=true
 window/stretch/mode="viewport"
 
 [input]

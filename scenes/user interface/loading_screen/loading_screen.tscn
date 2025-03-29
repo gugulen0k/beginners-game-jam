@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmtjj6algm8d2"]
+
+[ext_resource type="Script" uid="uid://8w4irwxk3jd6" path="res://scenes/user interface/loading_screen/loading_screen.gd" id="1_ptjjn"]
+
+[node name="LoadingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ptjjn")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 256
+text = "LOADING..."
