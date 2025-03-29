@@ -1,0 +1,328 @@
+[gd_scene load_steps=25 format=3 uid="uid://naeqc07b6qct"]
+
+[ext_resource type="Script" uid="uid://btga3hxw4vogx" path="res://scenes/levels/level_1/level_1.gd" id="1_fngju"]
+[ext_resource type="Shader" uid="uid://u2osdbsphxm5" path="res://shaders/prototype.gdshader" id="1_x3ahk"]
+[ext_resource type="Script" uid="uid://crawhy8swiqjc" path="res://scenes/entities/characters/characters.gd" id="3_7uxs1"]
+[ext_resource type="PackedScene" uid="uid://d0k1u5nvwlxh7" path="res://scenes/entities/orpheus/orpheus.tscn" id="4_3lh42"]
+[ext_resource type="PackedScene" uid="uid://dsg4uckeyjsey" path="res://scenes/entities/eurydice/eurydice.tscn" id="5_vmhy7"]
+[ext_resource type="PackedScene" uid="uid://owsmcq5li7i0" path="res://scenes/user interface/game_over/game_over.tscn" id="6_3lh42"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fngju"]
+sky_top_color = Color(0.937343, 0.82717, 0.71197, 1)
+sky_horizon_color = Color(0.175814, 0.208016, 0.354428, 1)
+sky_curve = 0.113679
+ground_bottom_color = Color(0.176471, 0.207843, 0.352941, 1)
+ground_horizon_color = Color(0.176471, 0.207843, 0.352941, 1)
+
+[sub_resource type="Sky" id="Sky_1bvp3"]
+sky_material = SubResource("ProceduralSkyMaterial_fngju")
+
+[sub_resource type="Environment" id="Environment_5o1mp"]
+background_mode = 2
+background_color = Color(0.670804, 0.557878, 0.508364, 1)
+sky = SubResource("Sky_1bvp3")
+fog_sun_scatter = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6iamk"]
+render_priority = 0
+shader = ExtResource("1_x3ahk")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 1
+shader_parameter/base_color = Color(0.0646965, 0.0646965, 0.0646965, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 2.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 10.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = true
+shader_parameter/checkered_color = Color(0.321728, 0.321728, 0.321728, 1)
+shader_parameter/checkered_blend_color = 0.66
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_31rk5"]
+material = SubResource("ShaderMaterial_6iamk")
+size = Vector3(30, 1, 2.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w3g2g"]
+material = SubResource("ShaderMaterial_6iamk")
+size = Vector3(15, 1, 2.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nsrm0"]
+render_priority = 0
+shader = ExtResource("1_x3ahk")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0.567542, 0.287249, 0.753157, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 5.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 10.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = true
+shader_parameter/checkered_color = Color(0.321728, 0.321728, 0.321728, 1)
+shader_parameter/checkered_blend_color = 0.66
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_vmhy7"]
+material = SubResource("ShaderMaterial_nsrm0")
+size = Vector3(10.015, 1, 2.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oc4kc"]
+render_priority = 0
+shader = ExtResource("1_x3ahk")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 2
+shader_parameter/base_color = Color(0.0646965, 0.0646965, 0.0646965, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 5.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 10.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = true
+shader_parameter/checkered_color = Color(0.321728, 0.321728, 0.321728, 1)
+shader_parameter/checkered_blend_color = 0.66
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_3lh42"]
+material = SubResource("ShaderMaterial_oc4kc")
+size = Vector3(3, 1, 2.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_58uyj"]
+material = SubResource("ShaderMaterial_oc4kc")
+size = Vector3(4, 1, 2.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fngju"]
+material = SubResource("ShaderMaterial_6iamk")
+size = Vector3(7, 1, 2.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5o1mp"]
+material = SubResource("ShaderMaterial_6iamk")
+size = Vector3(5, 1, 2.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6761a"]
+render_priority = 0
+shader = ExtResource("1_x3ahk")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 5
+shader_parameter/base_color = Color(0.0646965, 0.0646965, 0.0646965, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 5.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 10.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = true
+shader_parameter/checkered_color = Color(0.321728, 0.321728, 0.321728, 1)
+shader_parameter/checkered_blend_color = 0.66
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_spwf2"]
+material = SubResource("ShaderMaterial_6761a")
+size = Vector3(3, 0.5, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7uxs1"]
+size = Vector3(3, 0.5, 2.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ksju7"]
+render_priority = 0
+shader = ExtResource("1_x3ahk")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0.299547, 0.299547, 0.299547, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 2.0
+shader_parameter/grid_width = 0.0
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 0.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = true
+shader_parameter/checkered_color = Color(0.144063, 0.144063, 0.144062, 1)
+shader_parameter/checkered_blend_color = 0.5
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_ojo11"]
+material = SubResource("ShaderMaterial_ksju7")
+size = Vector3(28, 16.06, 1)
+
+[node name="Level1" type="Node3D"]
+script = ExtResource("1_fngju")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.43801, 39.0979)
+fov = 25.0
+size = 16.495
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5o1mp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.4515, 0)
+light_color = Color(0.56953, 0.606005, 0.756581, 1)
+
+[node name="LevelBorders" type="Node3D" parent="."]
+
+[node name="TopBorder" type="CSGMesh3D" parent="LevelBorders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.4142, 0)
+layers = 12
+use_collision = true
+collision_layer = 12
+collision_mask = 0
+mesh = SubResource("BoxMesh_31rk5")
+
+[node name="BottomBorder" type="CSGMesh3D" parent="LevelBorders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+collision_layer = 12
+collision_mask = 0
+mesh = SubResource("BoxMesh_31rk5")
+
+[node name="LeftBorder" type="CSGMesh3D" parent="LevelBorders"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -14.5001, 7.46807, 0)
+layers = 12
+use_collision = true
+collision_layer = 12
+collision_mask = 0
+mesh = SubResource("BoxMesh_w3g2g")
+
+[node name="RightBorder" type="CSGMesh3D" parent="LevelBorders"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 14.4876, 7.46807, 0)
+layers = 12
+use_collision = true
+collision_layer = 12
+collision_mask = 0
+mesh = SubResource("BoxMesh_w3g2g")
+
+[node name="EurydiceObstacles" type="Node3D" parent="."]
+
+[node name="Wall" type="CSGMesh3D" parent="EurydiceObstacles"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.416664, 9.90508, 0)
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+mesh = SubResource("BoxMesh_vmhy7")
+
+[node name="OrpheusObstacles" type="Node3D" parent="."]
+
+[node name="Floor1" type="CSGMesh3D" parent="OrpheusObstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.54523, 4.38338, 0)
+use_collision = true
+collision_layer = 9
+collision_mask = 0
+mesh = SubResource("BoxMesh_3lh42")
+
+[node name="Floor2" type="CSGMesh3D" parent="OrpheusObstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9526, 4.38338, 0)
+use_collision = true
+collision_layer = 9
+collision_mask = 0
+mesh = SubResource("BoxMesh_58uyj")
+
+[node name="Floor3" type="CSGMesh3D" parent="OrpheusObstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9943, 4.38338, 0)
+use_collision = true
+collision_layer = 9
+collision_mask = 0
+mesh = SubResource("BoxMesh_58uyj")
+
+[node name="NormalObstacles" type="Node3D" parent="."]
+
+[node name="Floor1" type="CSGMesh3D" parent="NormalObstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5511, 4.38338, 0)
+use_collision = true
+collision_layer = 12
+collision_mask = 0
+mesh = SubResource("BoxMesh_fngju")
+
+[node name="Floor2" type="CSGMesh3D" parent="NormalObstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.54888, 4.38338, 0)
+use_collision = true
+collision_layer = 12
+collision_mask = 0
+mesh = SubResource("BoxMesh_5o1mp")
+
+[node name="Floor3" type="CSGMesh3D" parent="NormalObstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.47868, 4.38338, 0)
+use_collision = true
+collision_layer = 12
+collision_mask = 0
+mesh = SubResource("BoxMesh_5o1mp")
+
+[node name="FinishZone" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.47868, 5.15137, 0)
+mesh = SubResource("BoxMesh_spwf2")
+
+[node name="Area3D" type="Area3D" parent="FinishZone"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FinishZone/Area3D"]
+shape = SubResource("BoxShape3D_7uxs1")
+
+[node name="Marker3D" type="Marker3D" parent="FinishZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.250959, 0)
+
+[node name="Background" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.72294, -1.75014)
+layers = 4
+mesh = SubResource("BoxMesh_ojo11")
+
+[node name="Characters" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.522, 6.35736, 0.115026)
+script = ExtResource("3_7uxs1")
+
+[node name="Orpheus" parent="Characters" node_paths=PackedStringArray("level") instance=ExtResource("4_3lh42")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.555595, -0.306378)
+level = NodePath("../..")
+jump_peak_time = 0.35
+jump_fall_time = 0.45
+jump_height = 6.0
+
+[node name="Eurydice" parent="Characters" instance=ExtResource("5_vmhy7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.684559, 0.420294, -0.394519)
+jump_peak_time = 0.35
+jump_fall_time = 0.45
+jump_height = 6.0
+
+[node name="GameOver" parent="." instance=ExtResource("6_3lh42")]
+visible = false
+
+[connection signal="game_over" from="." to="." method="_on_game_over"]
+[connection signal="body_entered" from="FinishZone/Area3D" to="." method="_on_area_3d_body_entered"]

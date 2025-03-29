@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://g7ekiod158lm"]
+[gd_scene load_steps=21 format=3 uid="uid://g7ekiod158lm"]
 
-[ext_resource type="Script" uid="uid://btga3hxw4vogx" path="res://scenes/levels/level_1.gd" id="1_6iamk"]
+[ext_resource type="Script" uid="uid://btga3hxw4vogx" path="res://scenes/levels/level_1/level_1.gd" id="1_6iamk"]
 [ext_resource type="Shader" uid="uid://u2osdbsphxm5" path="res://shaders/prototype.gdshader" id="1_ksju7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6iamk"]
@@ -39,7 +39,7 @@ size = Vector3(7, 1, 2.5)
 material = SubResource("ShaderMaterial_6iamk")
 size = Vector3(5, 1, 2.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6761a"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nsrm0"]
 render_priority = 0
 shader = ExtResource("1_ksju7")
 shader_parameter/world_uv = false
@@ -64,13 +64,13 @@ shader_parameter/use_albedo_color = false
 shader_parameter/albedo_alpha = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_sk5k4"]
-material = SubResource("ShaderMaterial_6761a")
+material = SubResource("ShaderMaterial_nsrm0")
 size = Vector3(3, 0.5, 2.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ksju7"]
 size = Vector3(3, 0.5, 2.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oc4kc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x42e6"]
 render_priority = 0
 shader = ExtResource("1_ksju7")
 shader_parameter/world_uv = false
@@ -95,10 +95,10 @@ shader_parameter/use_albedo_color = false
 shader_parameter/albedo_alpha = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_s8va5"]
-material = SubResource("ShaderMaterial_oc4kc")
+material = SubResource("ShaderMaterial_x42e6")
 size = Vector3(3, 1, 2.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nsrm0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6761a"]
 render_priority = 0
 shader = ExtResource("1_ksju7")
 shader_parameter/world_uv = false
@@ -123,18 +123,18 @@ shader_parameter/use_albedo_color = false
 shader_parameter/albedo_alpha = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_6761a"]
-material = SubResource("ShaderMaterial_nsrm0")
+material = SubResource("ShaderMaterial_6761a")
 size = Vector3(10.015, 1, 2.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_dga24"]
-material = SubResource("ShaderMaterial_oc4kc")
+material = SubResource("ShaderMaterial_x42e6")
 size = Vector3(4, 1, 2.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ksju7"]
 material = SubResource("ShaderMaterial_6iamk")
 size = Vector3(15, 1, 2.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ksju7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sk5k4"]
 render_priority = 0
 shader = ExtResource("1_ksju7")
 shader_parameter/world_uv = false
@@ -159,8 +159,24 @@ shader_parameter/use_albedo_color = false
 shader_parameter/albedo_alpha = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_oc4kc"]
-material = SubResource("ShaderMaterial_ksju7")
+material = SubResource("ShaderMaterial_sk5k4")
 size = Vector3(28, 16.06, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6iamk"]
+sky_top_color = Color(0.937343, 0.82717, 0.71197, 1)
+sky_horizon_color = Color(0.175814, 0.208016, 0.354428, 1)
+sky_curve = 0.113679
+ground_bottom_color = Color(0.176471, 0.207843, 0.352941, 1)
+ground_horizon_color = Color(0.176471, 0.207843, 0.352941, 1)
+
+[sub_resource type="Sky" id="Sky_oc4kc"]
+sky_material = SubResource("ProceduralSkyMaterial_6iamk")
+
+[sub_resource type="Environment" id="Environment_nsrm0"]
+background_mode = 2
+background_color = Color(0.670804, 0.557878, 0.508364, 1)
+sky = SubResource("Sky_oc4kc")
+fog_sun_scatter = 0.8
 
 [node name="Level1" type="Node3D"]
 script = ExtResource("1_6iamk")
@@ -261,5 +277,17 @@ mesh = SubResource("BoxMesh_ksju7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.72294, -1.75014)
 layers = 4
 mesh = SubResource("BoxMesh_oc4kc")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.43801, 39.0979)
+fov = 25.0
+size = 16.495
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nsrm0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.4515, 0)
+light_color = Color(0.56953, 0.606005, 0.756581, 1)
 
 [connection signal="body_entered" from="FinishZone/Area3D" to="." method="_on_area_3d_body_entered"]

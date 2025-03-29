@@ -7,5 +7,9 @@ func set_anim_state(name: String) -> void:
 	anim_state_machine.travel(name)
 
 
+func stop_animation() -> void:
+	anim_state_machine.stop()
+
+
 func get_anim_state() -> String:
 	return anim_state_machine.get_current_node()

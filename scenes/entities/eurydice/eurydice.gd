@@ -1,3 +1,5 @@
+class_name Eurydice
+
 extends Character
 
 @onready var animated_sprite: AnimatedSprite3D = $AnimatedSprite3D

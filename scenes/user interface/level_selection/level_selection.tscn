@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dmtjj6algm8d2" path="res://scenes/user interface/loading_screen/loading_screen.tscn" id="3_14bf4"]
 [ext_resource type="Script" uid="uid://bpn2mrsk13xwt" path="res://scenes/user interface/level_selection/level_select_button.gd" id="3_dtepf"]
 [ext_resource type="PackedScene" uid="uid://g7ekiod158lm" path="res://scenes/levels/level_1.tscn" id="4_8h20x"]
-[ext_resource type="PackedScene" uid="uid://bu3smqchbsyic" path="res://main.tscn" id="6_ichdu"]
+[ext_resource type="PackedScene" uid="uid://naeqc07b6qct" path="res://scenes/levels/level_1/level_1.tscn" id="6_ichdu"]
 
 [node name="LevelSelection" type="Control" node_paths=PackedStringArray("buttons")]
 layout_mode = 3

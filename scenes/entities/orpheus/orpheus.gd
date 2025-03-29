@@ -2,6 +2,8 @@ class_name Orpheus
 
 extends Character
 
+@export var level: Node3D
+
 @onready var orpheus_character: Node3D = $OrpheusCharacter
 @onready var raycasts_origin: Marker3D = $RaycastMarkers/RaycastsOrigin
 @onready var gaze_cone_start: Marker3D = $RaycastMarkers/GazeConeStart
@@ -13,10 +15,6 @@ const RAYS_COUNT: int = 50
 const SETTLE_ANIMATION_SPEED: float = 2
 
 func _physics_process(delta: float) -> void:
-	DebugUI.add_property('Orpheus velocity y', velocity.y)
-	DebugUI.add_property('Orpheus movement direction', movement_direction)
-	DebugUI.add_property('Orpheus anim state', orpheus_character.get_anim_state())
-	
 	if can_perform_actions():
 		handle_movement()
 		handle_jumping(delta)
@@ -28,9 +26,9 @@ func _physics_process(delta: float) -> void:
 			orpheus_character.set_anim_state('idle')
 	else:
 		stop()
+		orpheus_character.set_anim_state('idle')
 	
 	detect_eurydice()
-	
 	move_and_slide()
 
 
@@ -96,13 +94,11 @@ func detect_eurydice() -> void:
 		if (result):
 			if (result.collider.name == "Eurydice"):
 				line(ray_start_position, ray_end_position, Color.RED)
-				print("Hit Eurydice with raycast!")
-			else:
-				line(ray_start_position, ray_end_position, Color.ORANGE)
-		else:
-			line(ray_start_position, ray_end_position, Color.GREEN)
-	
-	#print(result)
+				level.game_over.emit()
+			#else:
+				#line(ray_start_position, ray_end_position, Color.ORANGE)
+		#else:
+			#line(ray_start_position, ray_end_position, Color.GREEN)
 	
 func move_into_final_area_position(marker_3d: Marker3D) -> void:
 	InputSystem.can_use_orpheus = false
@@ -118,6 +114,7 @@ func move_into_final_area_position(marker_3d: Marker3D) -> void:
 func on_move_into_final_area_finished() -> void:
 	transform.basis = transform.basis.rotated(Vector3.UP, PI)
 	orpheus_character.set_anim_state('idle')
+	finish_level()
 	
 	InputSystem.can_use_eurydice = true
 	InputSystem.can_use_orpheus = false
@@ -125,4 +122,3 @@ func on_move_into_final_area_finished() -> void:
 func handle_rotation() -> void:
 	if movement_direction:
 		transform.basis = Basis.looking_at(Vector3(movement_direction, 0, 0))
-	
