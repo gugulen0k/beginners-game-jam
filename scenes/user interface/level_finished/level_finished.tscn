@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://btcjpjyatk44o"]
+
+[ext_resource type="Theme" uid="uid://bcrem83sv3sbs" path="res://scenes/user interface/global/main_theme.tres" id="1_mfsjc"]
+[ext_resource type="AudioStream" uid="uid://nwhr4cbxtbar" path="res://audio/level_finished.mp3" id="2_jgscu"]
+[ext_resource type="Script" uid="uid://cbw16lbiqywk2" path="res://scenes/user interface/level_finished/level_finished.gd" id="2_xs5oa"]
+[ext_resource type="Script" uid="uid://df1iq33nv5jp6" path="res://scenes/user interface/level_finished/next_level_button.gd" id="3_pb5bi"]
+
+[node name="LevelFinished" type="Control" node_paths=PackedStringArray("main_menu_btn", "next_level_btn")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mfsjc")
+script = ExtResource("2_xs5oa")
+main_menu_btn = NodePath("CenterContainer/VSplitContainer/ButtonsContainer/MainMenu")
+next_level_btn = NodePath("CenterContainer/VSplitContainer/ButtonsContainer/NextLevel")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.784314)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VSplitContainer" type="VSplitContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VSplitContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "Level finished!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="CenterContainer/VSplitContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MainMenu" type="Button" parent="CenterContainer/VSplitContainer/ButtonsContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="NextLevel" type="Button" parent="CenterContainer/VSplitContainer/ButtonsContainer"]
+layout_mode = 2
+text = "Next Level"
+script = ExtResource("3_pb5bi")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_jgscu")

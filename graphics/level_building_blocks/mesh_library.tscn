@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://btjhqp5kwsbjn"]
+
+[ext_resource type="PackedScene" uid="uid://c038x1ycwthb0" path="res://graphics/blocks/simple_block.tscn" id="1_03gim"]
+[ext_resource type="PackedScene" uid="uid://dohwtr1wnwhec" path="res://graphics/blocks/eurydice_obstacle.tscn" id="2_62j8a"]
+[ext_resource type="PackedScene" uid="uid://drahvsay6wyjo" path="res://graphics/blocks/orpheus_obstacle.tscn" id="3_cxd3u"]
+
+[node name="MeshLibrary" type="Node3D"]
+
+[node name="EurydiceObstacle" parent="." instance=ExtResource("2_62j8a")]
+
+[node name="OrpheusObstacle" parent="." instance=ExtResource("3_cxd3u")]
+
+[node name="SimpleBlock" parent="." instance=ExtResource("1_03gim")]

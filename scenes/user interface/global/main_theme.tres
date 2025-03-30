@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bcrem83sv3sbs"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bcrem83sv3sbs"]
 
-[ext_resource type="FontFile" uid="uid://boua5kgblyxh7" path="res://scenes/user interface/global/fonts/faux-greeks/FauxGreeks-JxWn.ttf" id="1_7qkw6"]
+[ext_resource type="FontFile" uid="uid://ducgl27pcrf36" path="res://scenes/user interface/global/fonts/caesar-dressing/CaesarDressing-B153.ttf" id="1_konea"]
+[ext_resource type="FontFile" uid="uid://yxd2o7nb3tbe" path="res://scenes/user interface/global/fonts/aristoteliannbp/Aristoteliannbp-AEO7.ttf" id="2_konea"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ysfvj"]
 content_margin_left = 100.0
@@ -47,9 +48,9 @@ shadow_size = 10
 shadow_offset = Vector2(0, 10)
 
 [resource]
-Button/fonts/font = ExtResource("1_7qkw6")
+Button/fonts/font = ExtResource("1_konea")
 Button/styles/focus = null
 Button/styles/hover = SubResource("StyleBoxFlat_ysfvj")
 Button/styles/normal = SubResource("StyleBoxFlat_f76rg")
 Button/styles/pressed = SubResource("StyleBoxFlat_1abso")
-Label/fonts/font = ExtResource("1_7qkw6")
+Label/fonts/font = ExtResource("2_konea")

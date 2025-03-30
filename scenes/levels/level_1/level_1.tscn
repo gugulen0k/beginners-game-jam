@@ -1,11 +1,13 @@
-[gd_scene load_steps=25 format=3 uid="uid://naeqc07b6qct"]
+[gd_scene load_steps=28 format=3 uid="uid://naeqc07b6qct"]
 
 [ext_resource type="Script" uid="uid://btga3hxw4vogx" path="res://scenes/levels/level_1/level_1.gd" id="1_fngju"]
 [ext_resource type="Shader" uid="uid://u2osdbsphxm5" path="res://shaders/prototype.gdshader" id="1_x3ahk"]
 [ext_resource type="Script" uid="uid://crawhy8swiqjc" path="res://scenes/entities/characters/characters.gd" id="3_7uxs1"]
+[ext_resource type="Texture2D" uid="uid://ck0ohghopc3kb" path="res://2d_graphics/Cubes.png0011.png" id="3_58uyj"]
 [ext_resource type="PackedScene" uid="uid://d0k1u5nvwlxh7" path="res://scenes/entities/orpheus/orpheus.tscn" id="4_3lh42"]
 [ext_resource type="PackedScene" uid="uid://dsg4uckeyjsey" path="res://scenes/entities/eurydice/eurydice.tscn" id="5_vmhy7"]
 [ext_resource type="PackedScene" uid="uid://owsmcq5li7i0" path="res://scenes/user interface/game_over/game_over.tscn" id="6_3lh42"]
+[ext_resource type="AudioStream" uid="uid://d20qt0xaeyc5s" path="res://audio/ingame_music_without_lyre.mp3" id="7_vmhy7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fngju"]
 sky_top_color = Color(0.937343, 0.82717, 0.71197, 1)
@@ -14,13 +16,13 @@ sky_curve = 0.113679
 ground_bottom_color = Color(0.176471, 0.207843, 0.352941, 1)
 ground_horizon_color = Color(0.176471, 0.207843, 0.352941, 1)
 
-[sub_resource type="Sky" id="Sky_1bvp3"]
+[sub_resource type="Sky" id="Sky_58uyj"]
 sky_material = SubResource("ProceduralSkyMaterial_fngju")
 
 [sub_resource type="Environment" id="Environment_5o1mp"]
 background_mode = 2
 background_color = Color(0.670804, 0.557878, 0.508364, 1)
-sky = SubResource("Sky_1bvp3")
+sky = SubResource("Sky_58uyj")
 fog_sun_scatter = 0.8
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6iamk"]
@@ -55,33 +57,8 @@ size = Vector3(30, 1, 2.5)
 material = SubResource("ShaderMaterial_6iamk")
 size = Vector3(15, 1, 2.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nsrm0"]
-render_priority = 0
-shader = ExtResource("1_x3ahk")
-shader_parameter/world_uv = false
-shader_parameter/object_uv = false
-shader_parameter/object_uv_scale = Vector2(1, 1)
-shader_parameter/preset_color = 0
-shader_parameter/base_color = Color(0.567542, 0.287249, 0.753157, 1)
-shader_parameter/metalic = 0.0
-shader_parameter/roughness = 1.0
-shader_parameter/grid_scale = 5.0
-shader_parameter/grid_width = 0.01
-shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
-shader_parameter/inside_scale = 10.0
-shader_parameter/inside_width = 0.01
-shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
-shader_parameter/checkered = true
-shader_parameter/sub_checkered_grid = true
-shader_parameter/checkered_color = Color(0.321728, 0.321728, 0.321728, 1)
-shader_parameter/checkered_blend_color = 0.66
-shader_parameter/use_inside_uv = false
-shader_parameter/use_albedo_color = false
-shader_parameter/albedo_alpha = 0.5
-
-[sub_resource type="BoxMesh" id="BoxMesh_vmhy7"]
-material = SubResource("ShaderMaterial_nsrm0")
-size = Vector3(10.015, 1, 2.5)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_31rk5"]
+data = PackedVector3Array(-5.0075, 0.5, -1.25, -5.0075, -0.5, -1.25, 5.0075, -0.5, -1.25, -5.0075, 0.5, 1.25, -5.0075, -0.5, 1.25, -5.0075, -0.5, -1.25, -5.0075, -0.5, 1.25, 5.0075, -0.5, 1.25, -5.0075, -0.5, -1.25, -5.0075, 0.5, -1.25, -5.0075, 0.5, 1.25, -5.0075, -0.5, -1.25, -5.0075, 0.5, 1.25, -5.0075, 0.5, -1.25, 5.0075, 0.5, -1.25, -5.0075, 0.5, 1.25, 5.0075, 0.5, 1.25, -5.0075, -0.5, 1.25, 5.0075, -0.5, 1.25, 5.0075, -0.5, -1.25, -5.0075, -0.5, -1.25, 5.0075, 0.5, -1.25, 5.0075, -0.5, -1.25, 5.0075, -0.5, 1.25, 5.0075, 0.5, 1.25, 5.0075, -0.5, 1.25, -5.0075, -0.5, 1.25, 5.0075, 0.5, -1.25, -5.0075, 0.5, -1.25, 5.0075, -0.5, -1.25, 5.0075, 0.5, 1.25, -5.0075, 0.5, 1.25, 5.0075, 0.5, -1.25, 5.0075, 0.5, 1.25, 5.0075, 0.5, -1.25, 5.0075, -0.5, 1.25)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oc4kc"]
 render_priority = 0
@@ -115,13 +92,16 @@ size = Vector3(3, 1, 2.5)
 material = SubResource("ShaderMaterial_oc4kc")
 size = Vector3(4, 1, 2.5)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_vmhy7"]
+size = Vector3(2.83789, 1, 2.49414)
+
 [sub_resource type="BoxMesh" id="BoxMesh_fngju"]
 material = SubResource("ShaderMaterial_6iamk")
 size = Vector3(7, 1, 2.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_5o1mp"]
 material = SubResource("ShaderMaterial_6iamk")
-size = Vector3(5, 1, 2.5)
+size = Vector3(5.115, 1, 2.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6761a"]
 render_priority = 0
@@ -182,8 +162,13 @@ shader_parameter/albedo_alpha = 0.5
 material = SubResource("ShaderMaterial_ksju7")
 size = Vector3(28, 16.06, 1)
 
-[node name="Level1" type="Node3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_napug"]
+
+[node name="Level1" type="Node3D" node_paths=PackedStringArray("game_over_scene", "level_finish", "level_finish_marker")]
 script = ExtResource("1_fngju")
+game_over_scene = NodePath("GameOver")
+level_finish = NodePath("FinishZone")
+level_finish_marker = NodePath("FinishZone/FinishZone/Marker3D")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.43801, 39.0979)
@@ -231,18 +216,76 @@ collision_mask = 0
 mesh = SubResource("BoxMesh_w3g2g")
 
 [node name="EurydiceObstacles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.417778, 9.91666, 0)
 
-[node name="Wall" type="CSGMesh3D" parent="EurydiceObstacles"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.416664, 9.90508, 0)
-use_collision = true
+[node name="StaticBody3D" type="StaticBody3D" parent="EurydiceObstacles"]
 collision_layer = 2
 collision_mask = 0
-mesh = SubResource("BoxMesh_vmhy7")
+
+[node name="Sprite3D2" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, 4.41188, -1.19562)
+texture = ExtResource("3_58uyj")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D3" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, 3.44612, -1.19562)
+texture = ExtResource("3_58uyj")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D4" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, 2.45664, -1.19562)
+texture = ExtResource("3_58uyj")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D5" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, 1.46716, -1.19562)
+texture = ExtResource("3_58uyj")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D6" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, 0.494741, -1.19562)
+texture = ExtResource("3_58uyj")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D7" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, -0.477677, -1.19562)
+texture = ExtResource("3_58uyj")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D8" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, -1.46716, -1.19562)
+texture = ExtResource("3_58uyj")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D9" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, -2.43958, -1.19562)
+texture = ExtResource("3_58uyj")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D10" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, -3.37787, -1.19562)
+texture = ExtResource("3_58uyj")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D11" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, -4.35029, -1.19562)
+texture = ExtResource("3_58uyj")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D12" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, -4.48661, -1.19562)
+texture = ExtResource("3_58uyj")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_31rk5")
 
 [node name="OrpheusObstacles" type="Node3D" parent="."]
 
 [node name="Floor1" type="CSGMesh3D" parent="OrpheusObstacles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.54523, 4.38338, 0)
+visible = false
 use_collision = true
 collision_layer = 9
 collision_mask = 0
@@ -262,17 +305,26 @@ collision_layer = 9
 collision_mask = 0
 mesh = SubResource("BoxMesh_58uyj")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="OrpheusObstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.52255, 4.38577, 0)
+collision_layer = 9
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OrpheusObstacles/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0897217, 0, 0)
+shape = SubResource("BoxShape3D_vmhy7")
+
 [node name="NormalObstacles" type="Node3D" parent="."]
 
 [node name="Floor1" type="CSGMesh3D" parent="NormalObstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5511, 4.38338, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4997, 4.38338, 0)
 use_collision = true
 collision_layer = 12
 collision_mask = 0
 mesh = SubResource("BoxMesh_fngju")
 
 [node name="Floor2" type="CSGMesh3D" parent="NormalObstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.54888, 4.38338, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.59882, 4.38338, 0)
 use_collision = true
 collision_layer = 12
 collision_mask = 0
@@ -285,19 +337,19 @@ collision_layer = 12
 collision_mask = 0
 mesh = SubResource("BoxMesh_5o1mp")
 
-[node name="FinishZone" type="CSGMesh3D" parent="."]
+[node name="FinishZone" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.47868, 5.15137, 0)
-mesh = SubResource("BoxMesh_spwf2")
-
-[node name="Area3D" type="Area3D" parent="FinishZone"]
 collision_layer = 3
 collision_mask = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FinishZone/Area3D"]
-shape = SubResource("BoxShape3D_7uxs1")
+[node name="FinishZone" type="CSGMesh3D" parent="FinishZone"]
+mesh = SubResource("BoxMesh_spwf2")
 
-[node name="Marker3D" type="Marker3D" parent="FinishZone"]
+[node name="Marker3D" type="Marker3D" parent="FinishZone/FinishZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.250959, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FinishZone"]
+shape = SubResource("BoxShape3D_7uxs1")
 
 [node name="Background" type="CSGMesh3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.72294, -1.75014)
@@ -316,7 +368,7 @@ jump_fall_time = 0.45
 jump_height = 6.0
 
 [node name="Eurydice" parent="Characters" instance=ExtResource("5_vmhy7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.684559, 0.420294, -0.394519)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.684559, 0.420294, -0.947323)
 jump_peak_time = 0.35
 jump_fall_time = 0.45
 jump_height = 6.0
@@ -324,5 +376,20 @@ jump_height = 6.0
 [node name="GameOver" parent="." instance=ExtResource("6_3lh42")]
 visible = false
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_vmhy7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6304, 5.38338, -0.119272)
+mesh = SubResource("BoxMesh_napug")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6304, 6.38338, -0.119272)
+mesh = SubResource("BoxMesh_napug")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6304, 7.38338, -0.119272)
+mesh = SubResource("BoxMesh_napug")
+
 [connection signal="game_over" from="." to="." method="_on_game_over"]
-[connection signal="body_entered" from="FinishZone/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="FinishZone" to="." method="_on_area_3d_body_entered"]

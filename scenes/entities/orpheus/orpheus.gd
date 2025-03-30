@@ -14,7 +14,14 @@ const RAY_LENGTH: int = 50
 const RAYS_COUNT: int = 50
 const SETTLE_ANIMATION_SPEED: float = 2
 
+#
+#func _ready() -> void:
+	#transform.basis = Basis.looking_at(Vector3.RIGHT)
+
+
 func _physics_process(delta: float) -> void:
+	DebugUI.add_property('Orpheus movement dir', movement_direction)
+	
 	if can_perform_actions():
 		handle_movement()
 		handle_jumping(delta)
@@ -112,9 +119,8 @@ func move_into_final_area_position(marker_3d: Marker3D) -> void:
 	tween.finished.connect(on_move_into_final_area_finished)
 	
 func on_move_into_final_area_finished() -> void:
-	transform.basis = transform.basis.rotated(Vector3.UP, PI)
+	transform.basis = transform.basis.looking_at(Vector3.LEFT)
 	orpheus_character.set_anim_state('idle')
-	finish_level()
 	
 	InputSystem.can_use_eurydice = true
 	InputSystem.can_use_orpheus = false

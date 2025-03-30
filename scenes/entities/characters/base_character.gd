@@ -19,7 +19,6 @@ var movement_direction: float
 var old_movement_direction: float
 var is_able_to_perform_actions: bool
 var is_jumping: bool = false
-var is_finish_reached: bool = false
 
 # State Machine related variables
 enum State { IDLE, WALKING, JUMPING, FALLING, LANDING }
@@ -35,7 +34,6 @@ var fall_gravity: float
 
 func _ready() -> void:
 	calculate_movement_parameters()
-	transform.basis = Basis.looking_at(Vector3.RIGHT)
 
 
 func _physics_process(delta: float) -> void:
@@ -71,17 +69,9 @@ func jumping(value: bool) -> void:
 	is_jumping = value
 
 
-func finish_level() -> void:
-	is_finish_reached = true
-
-
-func reset_finish() -> void:
-	is_finish_reached = false
-
-
 func stop() -> void:
 	velocity.x = 0
-	
+
 
 func update_state() -> void:
 	if is_in_landing_animation:
@@ -100,8 +90,7 @@ func update_state() -> void:
 		current_state = State.IDLE
 
 func handle_jumping(delta: float) -> void:
-	if not is_able_to_perform_actions:
-		return
+	
 
 	if not is_on_floor():
 		if velocity.y > 0:

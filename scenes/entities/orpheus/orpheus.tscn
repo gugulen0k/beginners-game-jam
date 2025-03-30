@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://dva08t1ymq557" path="res://scenes/entities/orpheus/orpheus.gd" id="1_jpkvy"]
 [ext_resource type="PackedScene" uid="uid://c56t8tudciboh" path="res://scenes/entities/orpheus/orpheus_character.tscn" id="2_i7erg"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jpkvy"]
-size = Vector3(1.25, 1.81342, 1)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jpkvy"]
+radius = 0.620056
+height = 1.79934
 
 [node name="Orpheus" type="CharacterBody3D"]
 collision_mask = 5
@@ -12,7 +13,7 @@ script = ExtResource("1_jpkvy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.103119, 0)
-shape = SubResource("BoxShape3D_jpkvy")
+shape = SubResource("CapsuleShape3D_jpkvy")
 
 [node name="OrpheusCharacter" parent="." instance=ExtResource("2_i7erg")]
 transform = Transform3D(2.46, 0, 0, 0, 2.46, 0, 0, 0, 2.46, 0, -1, 0)

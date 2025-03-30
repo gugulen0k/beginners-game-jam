@@ -1,8 +1,7 @@
-[gd_scene load_steps=114 format=3 uid="uid://dsg4uckeyjsey"]
+[gd_scene load_steps=113 format=3 uid="uid://dsg4uckeyjsey"]
 
 [ext_resource type="Script" uid="uid://bj7vdjso2wjiy" path="res://scenes/entities/eurydice/eurydice.gd" id="1_8b2v8"]
-[ext_resource type="Texture2D" uid="uid://bo41o1sve15fh" path="res://graphics/FullSpriteSheet.png" id="2_nugoo"]
-[ext_resource type="Shape3D" uid="uid://gvf2nvbapqs4" path="res://scenes/entities/characters/character_collision_shape.tres" id="3_nugoo"]
+[ext_resource type="Texture2D" uid="uid://bo41o1sve15fh" path="res://2d_graphics/FullSpriteSheet.png" id="2_nugoo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nugoo"]
 atlas = ExtResource("2_nugoo")
@@ -252,10 +251,6 @@ region = Rect2(3584, 512, 512, 512)
 atlas = ExtResource("2_nugoo")
 region = Rect2(4096, 512, 512, 512)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kgals"]
-atlas = ExtResource("2_nugoo")
-region = Rect2(512, 2560, 512, 512)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_2jdno"]
 atlas = ExtResource("2_nugoo")
 region = Rect2(1024, 2560, 512, 512)
@@ -364,31 +359,31 @@ region = Rect2(2048, 1536, 512, 512)
 atlas = ExtResource("2_nugoo")
 region = Rect2(2560, 1536, 512, 512)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5yvvg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgals"]
 atlas = ExtResource("2_nugoo")
 region = Rect2(2560, 2048, 512, 512)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ryx4n"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yvvg"]
 atlas = ExtResource("2_nugoo")
 region = Rect2(3072, 2048, 512, 512)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s2x0p"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryx4n"]
 atlas = ExtResource("2_nugoo")
 region = Rect2(3584, 2048, 512, 512)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_urvos"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2x0p"]
 atlas = ExtResource("2_nugoo")
 region = Rect2(4096, 2048, 512, 512)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hk23y"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_urvos"]
 atlas = ExtResource("2_nugoo")
 region = Rect2(4608, 2048, 512, 512)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1qwfc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hk23y"]
 atlas = ExtResource("2_nugoo")
 region = Rect2(5120, 2048, 512, 512)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ccbkm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qwfc"]
 atlas = ExtResource("2_nugoo")
 region = Rect2(0, 2560, 512, 512)
 
@@ -645,9 +640,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kgals")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_2jdno")
 }, {
 "duration": 1.0,
@@ -739,6 +731,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 0.2,
+"texture": SubResource("AtlasTexture_kgals")
+}, {
+"duration": 0.2,
 "texture": SubResource("AtlasTexture_5yvvg")
 }, {
 "duration": 0.2,
@@ -755,9 +750,6 @@ animations = [{
 }, {
 "duration": 0.2,
 "texture": SubResource("AtlasTexture_1qwfc")
-}, {
-"duration": 0.2,
-"texture": SubResource("AtlasTexture_ccbkm")
 }],
 "loop": false,
 "name": &"landing",
@@ -805,14 +797,17 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8b2v8"]
+radius = 0.56
+height = 2.72663
+
 [node name="Eurydice" type="CharacterBody3D"]
 collision_layer = 10
 collision_mask = 6
 script = ExtResource("1_8b2v8")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
-billboard = 1
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 sprite_frames = SubResource("SpriteFrames_yjtdl")
 animation = &"landing"
 autoplay = "idle"
@@ -820,5 +815,5 @@ frame = 6
 frame_progress = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02005, 0)
-shape = ExtResource("3_nugoo")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.124873, 0.593145)
+shape = SubResource("CapsuleShape3D_8b2v8")

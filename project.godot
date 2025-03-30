@@ -17,13 +17,14 @@ config/features=PackedStringArray("4.4", "GL Compatibility")
 [autoload]
 
 DebugUI="*res://global_scripts/debug/debug.tscn"
-InputSystem="*res://global_scripts/input_system.gd"
+GlobalScenes="*res://global_scripts/global_scenes/global_scenes.tscn"
 SceneLoading="*res://global_scripts/scene_loading.gd"
+InputSystem="*res://global_scripts/input_system.gd"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=2560
+window/size/viewport_height=1440
 window/size/always_on_top=true
 window/stretch/mode="viewport"
 
