@@ -1,33 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dohwtr1wnwhec"]
+[gd_scene load_steps=3 format=3 uid="uid://dohwtr1wnwhec"]
 
-[ext_resource type="Shader" uid="uid://u2osdbsphxm5" path="res://shaders/prototype.gdshader" id="1_2pt83"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8p2l0"]
-render_priority = 0
-shader = ExtResource("1_2pt83")
-shader_parameter/world_uv = false
-shader_parameter/object_uv = false
-shader_parameter/object_uv_scale = Vector2(1, 1)
-shader_parameter/preset_color = 0
-shader_parameter/base_color = Color(0.737106, 0.53142, 0.834343, 1)
-shader_parameter/metalic = 0.0
-shader_parameter/roughness = 1.0
-shader_parameter/grid_scale = 1.0
-shader_parameter/grid_width = 0.01
-shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
-shader_parameter/inside_scale = 7.0
-shader_parameter/inside_width = 0.01
-shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
-shader_parameter/checkered = true
-shader_parameter/sub_checkered_grid = true
-shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
-shader_parameter/checkered_blend_color = 0.5
-shader_parameter/use_inside_uv = false
-shader_parameter/use_albedo_color = false
-shader_parameter/albedo_alpha = 0.5
-
-[sub_resource type="BoxMesh" id="BoxMesh_3qkfq"]
-material = SubResource("ShaderMaterial_8p2l0")
+[ext_resource type="Texture2D" uid="uid://ck0ohghopc3kb" path="res://2d_graphics/Cubes.png0011.png" id="1_2pt83"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kysj6"]
 points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
@@ -35,7 +8,6 @@ points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 
 [node name="EurydiceObstacle" type="Node3D"]
 
 [node name="EurydiceObstacle" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_3qkfq")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EurydiceObstacle"]
@@ -45,3 +17,8 @@ collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EurydiceObstacle/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_kysj6")
+debug_color = Color(0.704199, 0, 0.0770902, 0.42)
+
+[node name="Sprite3D" type="Sprite3D" parent="EurydiceObstacle"]
+transform = Transform3D(0.64, 0, 0, 0, 0.64, 0, 0, 0, 0.64, 0, 0, -0.5)
+texture = ExtResource("1_2pt83")

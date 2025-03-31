@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://dsg4uckeyjsey"]
+[gd_scene load_steps=121 format=3 uid="uid://dsg4uckeyjsey"]
 
 [ext_resource type="Script" uid="uid://bj7vdjso2wjiy" path="res://scenes/entities/eurydice/eurydice.gd" id="1_8b2v8"]
 [ext_resource type="Texture2D" uid="uid://bo41o1sve15fh" path="res://2d_graphics/FullSpriteSheet.png" id="2_nugoo"]
@@ -797,9 +797,37 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8b2v8"]
+albedo_color = Color(0.255349, 0.446792, 0.603942, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_nugoo"]
+material = SubResource("StandardMaterial3D_8b2v8")
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o50bt"]
+albedo_color = Color(0.254902, 0.447059, 0.603922, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m0d3l"]
+material = SubResource("StandardMaterial3D_o50bt")
+size = Vector3(0.05, 0.05, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60ftl"]
+albedo_color = Color(0.704147, 0.2603, 0.211911, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_gqvtd"]
+material = SubResource("StandardMaterial3D_60ftl")
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hjd3i"]
+albedo_color = Color(0.705882, 0.258824, 0.211765, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wjyg5"]
+material = SubResource("StandardMaterial3D_hjd3i")
+size = Vector3(0.05, 0.05, 0.5)
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8b2v8"]
 radius = 0.56
-height = 2.72663
+height = 2.97544
 
 [node name="Eurydice" type="CharacterBody3D"]
 collision_layer = 10
@@ -807,13 +835,37 @@ collision_mask = 6
 script = ExtResource("1_8b2v8")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, 0, 0)
 sprite_frames = SubResource("SpriteFrames_yjtdl")
 animation = &"landing"
 autoplay = "idle"
 frame = 6
 frame_progress = 1.0
 
+[node name="AxisZ" type="Node3D" parent="AnimatedSprite3D"]
+transform = Transform3D(2.77692, 0, 0, 0, 2.77692, 0, 0, 0, 2.77692, 0, 2.70538, -0.0710666)
+visible = false
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="AnimatedSprite3D/AxisZ"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, 0.216566)
+mesh = SubResource("PrismMesh_nugoo")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="AnimatedSprite3D/AxisZ"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.082344)
+mesh = SubResource("BoxMesh_m0d3l")
+
+[node name="AxisX" type="Node3D" parent="AnimatedSprite3D"]
+transform = Transform3D(-1.21383e-07, 0, 2.77692, 0, 2.77692, 0, -2.77692, 0, -1.21383e-07, 0, 2.70538, -0.0710666)
+visible = false
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="AnimatedSprite3D/AxisX"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -5.58794e-09, 0, 0.214013)
+mesh = SubResource("PrismMesh_gqvtd")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="AnimatedSprite3D/AxisX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.082344)
+mesh = SubResource("BoxMesh_wjyg5")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.124873, 0.593145)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0436625, -0.109319, 1.2)
 shape = SubResource("CapsuleShape3D_8b2v8")

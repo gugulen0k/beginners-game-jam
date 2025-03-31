@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cbw16lbiqywk2" path="res://scenes/user interface/level_finished/level_finished.gd" id="2_xs5oa"]
 [ext_resource type="Script" uid="uid://df1iq33nv5jp6" path="res://scenes/user interface/level_finished/next_level_button.gd" id="3_pb5bi"]
 
-[node name="LevelFinished" type="Control" node_paths=PackedStringArray("main_menu_btn", "next_level_btn")]
+[node name="LevelFinished" type="Control" node_paths=PackedStringArray("next_level_btn")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +14,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_mfsjc")
 script = ExtResource("2_xs5oa")
-main_menu_btn = NodePath("CenterContainer/VSplitContainer/ButtonsContainer/MainMenu")
 next_level_btn = NodePath("CenterContainer/VSplitContainer/ButtonsContainer/NextLevel")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -49,10 +48,6 @@ vertical_alignment = 1
 [node name="ButtonsContainer" type="HBoxContainer" parent="CenterContainer/VSplitContainer"]
 layout_mode = 2
 alignment = 1
-
-[node name="MainMenu" type="Button" parent="CenterContainer/VSplitContainer/ButtonsContainer"]
-layout_mode = 2
-text = "Main Menu"
 
 [node name="NextLevel" type="Button" parent="CenterContainer/VSplitContainer/ButtonsContainer"]
 layout_mode = 2

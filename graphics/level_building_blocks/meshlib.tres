@@ -68,7 +68,7 @@ shader_parameter/use_inside_uv = false
 shader_parameter/use_albedo_color = false
 shader_parameter/albedo_alpha = 0.5
 
-[sub_resource type="BoxMesh" id="BoxMesh_bh5pk"]
+[sub_resource type="BoxMesh" id="BoxMesh_4hccv"]
 material = SubResource("ShaderMaterial_i458f")
 
 [sub_resource type="Image" id="Image_4hccv"]
@@ -80,7 +80,7 @@ data = {
 "width": 64
 }
 
-[sub_resource type="ImageTexture" id="ImageTexture_bouxw"]
+[sub_resource type="ImageTexture" id="ImageTexture_i458f"]
 image = SubResource("Image_4hccv")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vlxgw"]
@@ -110,7 +110,7 @@ shader_parameter/use_inside_uv = false
 shader_parameter/use_albedo_color = false
 shader_parameter/albedo_alpha = 0.5
 
-[sub_resource type="BoxMesh" id="BoxMesh_ot76v"]
+[sub_resource type="BoxMesh" id="BoxMesh_bh5pk"]
 material = SubResource("ShaderMaterial_ql6dj")
 
 [sub_resource type="Image" id="Image_4mi5w"]
@@ -122,7 +122,7 @@ data = {
 "width": 64
 }
 
-[sub_resource type="ImageTexture" id="ImageTexture_18f7f"]
+[sub_resource type="ImageTexture" id="ImageTexture_bouxw"]
 image = SubResource("Image_4mi5w")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_41nkj"]
@@ -138,18 +138,18 @@ item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 
 item/0/navigation_layers = 1
 item/0/preview = SubResource("ImageTexture_4mi5w")
 item/1/name = "OrpheusObstacle"
-item/1/mesh = SubResource("BoxMesh_bh5pk")
+item/1/mesh = SubResource("BoxMesh_4hccv")
 item/1/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/1/mesh_cast_shadow = 1
 item/1/shapes = [SubResource("ConvexPolygonShape3D_vlxgw"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/1/navigation_layers = 1
-item/1/preview = SubResource("ImageTexture_bouxw")
+item/1/preview = SubResource("ImageTexture_i458f")
 item/2/name = "SimpleBlock"
-item/2/mesh = SubResource("BoxMesh_ot76v")
+item/2/mesh = SubResource("BoxMesh_bh5pk")
 item/2/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/2/mesh_cast_shadow = 1
 item/2/shapes = [SubResource("ConvexPolygonShape3D_41nkj"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/2/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/2/navigation_layers = 1
-item/2/preview = SubResource("ImageTexture_18f7f")
+item/2/preview = SubResource("ImageTexture_bouxw")

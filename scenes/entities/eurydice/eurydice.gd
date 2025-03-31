@@ -51,9 +51,8 @@ func play_state_animation():
 
 
 func handle_rotation() -> void:
-	if movement_direction and is_equal_approx(movement_direction, old_movement_direction):
-		var base_scale = 0.6
+	if is_moving():
+		var base_scale = 0.65
 		
 		var tween = get_tree().create_tween()
 		tween.tween_property(animated_sprite, 'scale:x', base_scale * (-1 if movement_direction < 0 else 1), 0.1)
-		animated_sprite.flip_h = movement_direction < 0

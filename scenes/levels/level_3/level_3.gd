@@ -12,7 +12,8 @@ signal game_over
 
 
 func _ready() -> void:
-	#level_music.play() # Enable level music
+	game_over.connect(_on_game_over)
+	level_music.play() # Enable level music
 	
 	# ----- Enable movement for both characters ----
 	InputSystem.can_use_eurydice = true
@@ -48,8 +49,8 @@ func _on_game_over() -> void:
 	# -----------------------------------------------
 	
 	game_over_scene.show() # Show game over UI
-	
-	#level_music.stop() # Stop the level music
+	level_music.stop() # Stop the level music
+	# [TODO] Play game over music
 
 func _on_main_menu_pressed() -> void:
 	var main_menu_scene = GlobalScenes.get_scene(GlobalScenes.SceneNames.MAIN_MENU)
@@ -62,7 +63,8 @@ func _on_select_level_pressed() -> void:
 
 
 func _on_next_level_pressed() -> void:
-	print('no more levels')
+	var next_scene: PackedScene = level_finished_scene.next_level_btn.next_level_scene
+	get_tree().change_scene_to_packed(next_scene)
 
 
 func _on_try_again_pressed() -> void:
@@ -90,5 +92,5 @@ func set_siglans_for_ui_btns() -> void:
 	var lf_next_level_btn = level_finished_scene.next_level_btn
 	
 	lf_main_menu_btn.pressed.connect(_on_main_menu_pressed)
-	lf_next_level_btn.presseed.connect(_on_next_level_pressed)
+	lf_next_level_btn.pressed.connect(_on_next_level_pressed)
 	# --------------------------------------------------------------

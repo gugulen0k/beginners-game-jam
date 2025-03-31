@@ -4,38 +4,44 @@ extends Character
 
 @export var level: Node3D
 
-@onready var orpheus_character: Node3D = $OrpheusCharacter
+@onready var orpheus_character: Node3D = $Orpheus
 @onready var raycasts_origin: Marker3D = $RaycastMarkers/RaycastsOrigin
 @onready var gaze_cone_start: Marker3D = $RaycastMarkers/GazeConeStart
 @onready var gaze_cone_end: Marker3D = $RaycastMarkers/GazeConeEnd
 @onready var raycast_markers: Node3D = $RaycastMarkers
 
 const RAY_LENGTH: int = 50
-const RAYS_COUNT: int = 50
+const RAYS_COUNT: int = 3
 const SETTLE_ANIMATION_SPEED: float = 2
 
-#
-#func _ready() -> void:
-	#transform.basis = Basis.looking_at(Vector3.RIGHT)
+var is_eurydice_detected: bool = false
+
+func _ready() -> void:
+	super._ready()
+	transform.basis = Basis.looking_at(Vector3.RIGHT)
 
 
 func _physics_process(delta: float) -> void:
 	DebugUI.add_property('Orpheus movement dir', movement_direction)
+	DebugUI.add_property('Orpheus velocity X', velocity.x)
 	
 	if can_perform_actions():
 		handle_movement()
 		handle_jumping(delta)
 		handle_rotation()
 		
-		if is_moving():
-			orpheus_character.set_anim_state('walk')
-		else:
-			orpheus_character.set_anim_state('idle')
+		#if is_moving():
+			#orpheus_character.set_anim_state('walk')
+		#else:
+			#orpheus_character.set_anim_state('idle')
 	else:
 		stop()
-		orpheus_character.set_anim_state('idle')
+		
+		if not is_eurydice_detected:
+			detect_eurydice()
+		#orpheus_character.set_anim_state('idle')
 	
-	detect_eurydice()
+	
 	move_and_slide()
 
 
@@ -101,13 +107,16 @@ func detect_eurydice() -> void:
 		if (result):
 			if (result.collider.name == "Eurydice"):
 				line(ray_start_position, ray_end_position, Color.RED)
+				is_eurydice_detected = true
 				level.game_over.emit()
 			#else:
 				#line(ray_start_position, ray_end_position, Color.ORANGE)
 		#else:
 			#line(ray_start_position, ray_end_position, Color.GREEN)
-	
+
+
 func move_into_final_area_position(marker_3d: Marker3D) -> void:
+	print('here')
 	InputSystem.can_use_orpheus = false
 	InputSystem.can_use_eurydice = false
 	
@@ -117,13 +126,15 @@ func move_into_final_area_position(marker_3d: Marker3D) -> void:
 	
 	# Use the tween's finished callback for the actions after the movement
 	tween.finished.connect(on_move_into_final_area_finished)
-	
+
+
 func on_move_into_final_area_finished() -> void:
 	transform.basis = transform.basis.looking_at(Vector3.LEFT)
-	orpheus_character.set_anim_state('idle')
+	#orpheus_character.set_anim_state('idle')
 	
 	InputSystem.can_use_eurydice = true
 	InputSystem.can_use_orpheus = false
+
 
 func handle_rotation() -> void:
 	if movement_direction:

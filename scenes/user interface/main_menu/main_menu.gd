@@ -1,10 +1,10 @@
 extends Control
 
-@onready var play_button : Button = %PlayButton
+@export var play_btn: Button
+@export var first_level_scene: PackedScene
 
 func _ready() -> void:
-	play_button.pressed.connect(transition_to_level_selection)
+	play_btn.pressed.connect(_on_transition_to_first_level)
 	
-func transition_to_level_selection() -> void:
-	var level_selection_scene = GlobalScenes.get_scene(GlobalScenes.SceneNames.LEVEL_SELECTION)
-	get_tree().change_scene_to_packed(level_selection_scene)
+func _on_transition_to_first_level() -> void:
+	get_tree().change_scene_to_packed(first_level_scene)

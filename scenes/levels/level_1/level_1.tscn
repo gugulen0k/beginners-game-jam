@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://naeqc07b6qct"]
+[gd_scene load_steps=29 format=3 uid="uid://naeqc07b6qct"]
 
 [ext_resource type="Script" uid="uid://btga3hxw4vogx" path="res://scenes/levels/level_1/level_1.gd" id="1_fngju"]
 [ext_resource type="Shader" uid="uid://u2osdbsphxm5" path="res://shaders/prototype.gdshader" id="1_x3ahk"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://dsg4uckeyjsey" path="res://scenes/entities/eurydice/eurydice.tscn" id="5_vmhy7"]
 [ext_resource type="PackedScene" uid="uid://owsmcq5li7i0" path="res://scenes/user interface/game_over/game_over.tscn" id="6_3lh42"]
 [ext_resource type="AudioStream" uid="uid://d20qt0xaeyc5s" path="res://audio/ingame_music_without_lyre.mp3" id="7_vmhy7"]
+[ext_resource type="MeshLibrary" uid="uid://c2y2edkitxr22" path="res://graphics/level_building_blocks/meshlib.tres" id="9_ojo11"]
+[ext_resource type="PackedScene" uid="uid://btcjpjyatk44o" path="res://scenes/user interface/level_finished/level_finished.tscn" id="10_w3g2g"]
+[ext_resource type="PackedScene" uid="uid://dh7gsxed1hkcl" path="res://scenes/levels/level_2/level_2.tscn" id="11_napug"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fngju"]
 sky_top_color = Color(0.937343, 0.82717, 0.71197, 1)
@@ -86,14 +89,11 @@ shader_parameter/albedo_alpha = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_3lh42"]
 material = SubResource("ShaderMaterial_oc4kc")
-size = Vector3(3, 1, 2.5)
+size = Vector3(2.83, 1, 2.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_58uyj"]
 material = SubResource("ShaderMaterial_oc4kc")
 size = Vector3(4, 1, 2.5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_vmhy7"]
-size = Vector3(2.83789, 1, 2.49414)
 
 [sub_resource type="BoxMesh" id="BoxMesh_fngju"]
 material = SubResource("ShaderMaterial_6iamk")
@@ -103,7 +103,7 @@ size = Vector3(7, 1, 2.5)
 material = SubResource("ShaderMaterial_6iamk")
 size = Vector3(5.115, 1, 2.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6761a"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3g2g"]
 render_priority = 0
 shader = ExtResource("1_x3ahk")
 shader_parameter/world_uv = false
@@ -128,7 +128,7 @@ shader_parameter/use_albedo_color = false
 shader_parameter/albedo_alpha = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_spwf2"]
-material = SubResource("ShaderMaterial_6761a")
+material = SubResource("ShaderMaterial_w3g2g")
 size = Vector3(3, 0.5, 2.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7uxs1"]
@@ -162,16 +162,16 @@ shader_parameter/albedo_alpha = 0.5
 material = SubResource("ShaderMaterial_ksju7")
 size = Vector3(28, 16.06, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_napug"]
-
-[node name="Level1" type="Node3D" node_paths=PackedStringArray("game_over_scene", "level_finish", "level_finish_marker")]
+[node name="Level1" type="Node3D" node_paths=PackedStringArray("game_over_scene", "level_finished_scene", "level_finish", "level_finish_marker", "level_music")]
 script = ExtResource("1_fngju")
 game_over_scene = NodePath("GameOver")
+level_finished_scene = NodePath("LevelFinished")
 level_finish = NodePath("FinishZone")
 level_finish_marker = NodePath("FinishZone/FinishZone/Marker3D")
+level_music = NodePath("LevelMusic")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.43801, 39.0979)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.462, 38)
 fov = 25.0
 size = 16.495
 
@@ -216,9 +216,10 @@ collision_mask = 0
 mesh = SubResource("BoxMesh_w3g2g")
 
 [node name="EurydiceObstacles" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.417778, 9.91666, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.417778, 9.28812, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EurydiceObstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0271406, -0.0531712, 0)
 collision_layer = 2
 collision_mask = 0
 
@@ -282,10 +283,10 @@ transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 
 shape = SubResource("ConcavePolygonShape3D_31rk5")
 
 [node name="OrpheusObstacles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.628544, 0)
 
 [node name="Floor1" type="CSGMesh3D" parent="OrpheusObstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.54523, 4.38338, 0)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5713, 4.38338, 0)
 use_collision = true
 collision_layer = 9
 collision_mask = 0
@@ -305,16 +306,8 @@ collision_layer = 9
 collision_mask = 0
 mesh = SubResource("BoxMesh_58uyj")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="OrpheusObstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.52255, 4.38577, 0)
-collision_layer = 9
-collision_mask = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="OrpheusObstacles/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0897217, 0, 0)
-shape = SubResource("BoxShape3D_vmhy7")
-
 [node name="NormalObstacles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.628544, 0)
 
 [node name="Floor1" type="CSGMesh3D" parent="NormalObstacles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4997, 4.38338, 0)
@@ -338,7 +331,7 @@ collision_mask = 0
 mesh = SubResource("BoxMesh_5o1mp")
 
 [node name="FinishZone" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.47868, 5.15137, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.47868, 4.52527, 0)
 collision_layer = 3
 collision_mask = 3
 
@@ -346,7 +339,7 @@ collision_mask = 3
 mesh = SubResource("BoxMesh_spwf2")
 
 [node name="Marker3D" type="Marker3D" parent="FinishZone/FinishZone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.250959, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.207183, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FinishZone"]
 shape = SubResource("BoxShape3D_7uxs1")
@@ -357,39 +350,45 @@ layers = 4
 mesh = SubResource("BoxMesh_ojo11")
 
 [node name="Characters" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.522, 6.35736, 0.115026)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.522, 5.74035, 0.681326)
 script = ExtResource("3_7uxs1")
 
 [node name="Orpheus" parent="Characters" node_paths=PackedStringArray("level") instance=ExtResource("4_3lh42")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.555595, -0.306378)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0358415, -0.632017)
 level = NodePath("../..")
 jump_peak_time = 0.35
 jump_fall_time = 0.45
-jump_height = 6.0
+jump_distance = 3.0
 
 [node name="Eurydice" parent="Characters" instance=ExtResource("5_vmhy7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.684559, 0.420294, -0.947323)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.41326, 0.118717, -1.87841)
 jump_peak_time = 0.35
 jump_fall_time = 0.45
-jump_height = 6.0
+jump_distance = 3.0
 
 [node name="GameOver" parent="." instance=ExtResource("6_3lh42")]
 visible = false
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_vmhy7")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6304, 5.38338, -0.119272)
-mesh = SubResource("BoxMesh_napug")
+[node name="FloorAndCeiling" type="GridMap" parent="."]
+visible = false
+mesh_library = ExtResource("9_ojo11")
+cell_size = Vector3(1, 1, 1)
+collision_layer = 0
+collision_mask = 0
+data = {
+"cells": PackedInt32Array(-15, 65535, 2, -15, 0, 2, -14, 65535, 2, -14, 0, 2, -13, 65535, 2, -13, 0, 2, -12, 65535, 2, -12, 0, 2, -11, 65535, 2, -11, 0, 2, -10, 65535, 2, -10, 0, 2, -9, 65535, 2, -9, 0, 2, -8, 65535, 2, -8, 0, 2, -7, 65535, 2, -7, 0, 2, -6, 65535, 2, -6, 0, 2, -5, 65535, 2, -5, 0, 2, -4, 65535, 2, -4, 0, 2, -3, 65535, 2, -3, 0, 2, -2, 65535, 2, -2, 0, 2, -1, 65535, 2, -1, 0, 2, -65536, 65535, 2, -65536, 0, 2, -65535, 65535, 2, -65535, 0, 2, -65534, 65535, 2, -65534, 0, 2, -65533, 65535, 2, -65533, 0, 2, -65532, 65535, 2, -65532, 0, 2, -65531, 65535, 2, -65531, 0, 2, -65530, 65535, 2, -65530, 0, 2, -65529, 65535, 2, -65529, 0, 2, -65528, 65535, 2, -65528, 0, 2, -65527, 65535, 2, -65527, 0, 2, -65526, 65535, 2, -65526, 0, 2, -65525, 65535, 2, -65525, 0, 2, -65524, 65535, 2, -65524, 0, 2, -65523, 65535, 2, -65523, 0, 2, -65522, 65535, 2, -65522, 0, 2, 65521, 65535, 2, 65521, 0, 2, 14, 65535, 2, 14, 0, 2, 65550, 65535, 2, 65550, 0, 2, 131057, 65535, 2, 131057, 0, 2, 196593, 65535, 2, 196593, 0, 2, 131086, 65535, 2, 131086, 0, 2, 196622, 65535, 2, 196622, 0, 2, 262129, 65535, 2, 262129, 0, 2, 262158, 65535, 2, 262158, 0, 2, 327665, 65535, 2, 327665, 0, 2, 327694, 65535, 2, 327694, 0, 2, 393201, 65535, 2, 393201, 0, 2, 393230, 65535, 2, 393230, 0, 2, 458737, 65535, 2, 458737, 0, 2, 458766, 65535, 2, 458766, 0, 2, 524273, 65535, 2, 524273, 0, 2, 524302, 65535, 2, 524302, 0, 2, 589809, 65535, 2, 589809, 0, 2, 589838, 65535, 2, 589838, 0, 2, 655345, 65535, 2, 655345, 0, 2, 655374, 65535, 2, 655374, 0, 2, 720881, 65535, 2, 720881, 0, 2, 720910, 65535, 2, 720910, 0, 2, 786417, 65535, 2, 786417, 0, 2, 786446, 65535, 2, 786446, 0, 2, 851953, 65535, 2, 851953, 0, 2, 851982, 65535, 2, 851982, 0, 2, 917489, 65535, 2, 917489, 0, 2, 917518, 65535, 2, 917518, 0, 2, 983025, 65535, 2, 983025, 0, 2, 983054, 65535, 2, 983054, 0, 2, 1048561, 65535, 2, 1048561, 0, 2, 1114097, 65535, 2, 1114097, 0, 2, 1114098, 65535, 2, 1114098, 0, 2, 1114099, 65535, 2, 1114099, 0, 2, 1114100, 65535, 2, 1114100, 0, 2, 1114101, 65535, 2, 1114101, 0, 2, 1114102, 65535, 2, 1114102, 0, 2, 1114103, 65535, 2, 1114103, 0, 2, 1114104, 65535, 2, 1114104, 0, 2, 1114105, 65535, 2, 1114105, 0, 2, 1114106, 65535, 2, 1114106, 0, 2, 1114107, 65535, 2, 1114107, 0, 2, 1114108, 65535, 2, 1114108, 0, 2, 1114109, 65535, 2, 1114109, 0, 2, 1114110, 65535, 2, 1114110, 0, 2, 1114111, 65535, 2, 1114111, 0, 2, 1048576, 65535, 2, 1048576, 0, 2, 1048577, 65535, 2, 1048577, 0, 2, 1048578, 65535, 2, 1048578, 0, 2, 1048579, 65535, 2, 1048579, 0, 2, 1048580, 65535, 2, 1048580, 0, 2, 1048581, 65535, 2, 1048581, 0, 2, 1048582, 65535, 2, 1048582, 0, 2, 1048583, 65535, 2, 1048583, 0, 2, 1048584, 65535, 2, 1048584, 0, 2, 1048585, 65535, 2, 1048585, 0, 2, 1048586, 65535, 2, 1048586, 0, 2, 1048587, 65535, 2, 1048587, 0, 2, 1048588, 65535, 2, 1048588, 0, 2, 1048589, 65535, 2, 1048589, 0, 2, 1048590, 65535, 2, 1048590, 0, 2, 262130, 65535, 2, 262130, 0, 2, 262131, 65535, 2, 262131, 0, 2, 262132, 65535, 2, 262132, 0, 2, 262133, 65535, 2, 262133, 0, 2, 262134, 65535, 2, 262134, 0, 2, 262135, 65535, 2, 262135, 0, 2, 262136, 65535, 2, 262136, 0, 2, 262129, 1, 2, 262130, 1, 2, 262131, 1, 2, 262132, 1, 2, 262133, 1, 2, 262134, 1, 2, 262135, 1, 2, 262136, 1, 2)
+}
+metadata/_editor_floor_ = Vector3(0, 3, 0)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6304, 6.38338, -0.119272)
-mesh = SubResource("BoxMesh_napug")
+[node name="LevelFinished" parent="." instance=ExtResource("10_w3g2g")]
+visible = false
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6304, 7.38338, -0.119272)
-mesh = SubResource("BoxMesh_napug")
+[node name="NextLevel" parent="LevelFinished/CenterContainer/VSplitContainer/ButtonsContainer" index="0"]
+next_level_scene = ExtResource("11_napug")
 
-[connection signal="game_over" from="." to="." method="_on_game_over"]
-[connection signal="body_entered" from="FinishZone" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="FinishZone" to="." method="_on_finish_zone_body_entered"]
+
+[editable path="LevelFinished"]
