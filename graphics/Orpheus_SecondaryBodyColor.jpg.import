@@ -2,14 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btu3fhhekid3v"
+uid="uid://k08yxri4lslj"
 path.s3tc="res://.godot/imported/Orpheus_SecondaryBodyColor.jpg-f26240c35d915a6c5c50599d3ba3fc73.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "814c48dce2b5325ecad3a14a20bf7e87"
+"md5": "7245e372c41c6b334fad380a66ded749"
 }
 
 [deps]

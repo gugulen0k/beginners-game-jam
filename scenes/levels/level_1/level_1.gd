@@ -13,7 +13,7 @@ signal game_over
 
 func _ready() -> void:
 	game_over.connect(_on_game_over)
-	level_music.play() # Enable level music
+	#level_music.play() # Enable level music
 	
 	# ----- Enable movement for both characters ----
 	InputSystem.can_use_eurydice = true

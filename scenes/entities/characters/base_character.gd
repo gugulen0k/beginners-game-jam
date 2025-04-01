@@ -5,10 +5,10 @@ extends CharacterBody3D
 @export_category('Character parameters')
 
 @export_category('Jumping')
-@export var jump_peak_time: float = 0.5
-@export var jump_fall_time: float = 0.5
-@export var jump_height: float = 5.0
-@export var jump_distance: float = 4.0
+@export var jump_peak_time: float = 0.35
+@export var jump_fall_time: float = 0.45
+@export var jump_height: float = 6.0
+@export var jump_distance: float = 5.0
 
 @export_category('Rotation')
 @export var rotation_speed: float = 8.0

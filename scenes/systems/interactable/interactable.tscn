@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk2qq6glush64"]
+
+[ext_resource type="Script" uid="uid://dxtrx14btv3bu" path="res://scenes/systems/interactable/interactable.gd" id="1_2060y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t0y4k"]
+
+[node name="Interactable" type="Area3D"]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_2060y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_t0y4k")
+debug_color = Color(0.347788, 0.619938, 1.34766e-06, 0.42)

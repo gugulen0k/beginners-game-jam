@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://pajm78x0py42"]
 
 [ext_resource type="Script" uid="uid://b2d5cc6pmespa" path="res://global_scripts/global_scenes/global_scenes.gd" id="1_f5jgd"]
-[ext_resource type="PackedScene" uid="uid://bbykm8vsbwsv5" path="res://scenes/user interface/main_menu/main_menu.tscn" id="2_8jodn"]
-[ext_resource type="PackedScene" uid="uid://dmtjj6algm8d2" path="res://scenes/user interface/loading_screen/loading_screen.tscn" id="3_x365e"]
-[ext_resource type="PackedScene" uid="uid://cwe3x2aa4nigr" path="res://scenes/user interface/level_selection/level_selection.tscn" id="4_x365e"]
-[ext_resource type="PackedScene" uid="uid://btcjpjyatk44o" path="res://scenes/user interface/level_finished/level_finished.tscn" id="5_njam0"]
+[ext_resource type="PackedScene" uid="uid://bbykm8vsbwsv5" path="res://scenes/user_interface/main_menu/main_menu.tscn" id="2_8jodn"]
+[ext_resource type="PackedScene" uid="uid://dmtjj6algm8d2" path="res://scenes/user_interface/loading_screen/loading_screen.tscn" id="3_x365e"]
+[ext_resource type="PackedScene" uid="uid://cwe3x2aa4nigr" path="res://scenes/user_interface/level_selection/level_selection.tscn" id="4_x365e"]
+[ext_resource type="PackedScene" uid="uid://btcjpjyatk44o" path="res://scenes/user_interface/level_finished/level_finished.tscn" id="5_njam0"]
 
 [node name="GlobalScenes" type="Node3D"]
 script = ExtResource("1_f5jgd")

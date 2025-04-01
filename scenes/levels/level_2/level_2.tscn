@@ -6,8 +6,8 @@
 [ext_resource type="Script" uid="uid://crawhy8swiqjc" path="res://scenes/entities/characters/characters.gd" id="4_ugaie"]
 [ext_resource type="PackedScene" uid="uid://d0k1u5nvwlxh7" path="res://scenes/entities/orpheus/orpheus.tscn" id="5_iup6o"]
 [ext_resource type="PackedScene" uid="uid://dsg4uckeyjsey" path="res://scenes/entities/eurydice/eurydice.tscn" id="6_ses5c"]
-[ext_resource type="PackedScene" uid="uid://owsmcq5li7i0" path="res://scenes/user interface/game_over/game_over.tscn" id="7_up0v7"]
-[ext_resource type="PackedScene" uid="uid://btcjpjyatk44o" path="res://scenes/user interface/level_finished/level_finished.tscn" id="8_4xau6"]
+[ext_resource type="PackedScene" uid="uid://owsmcq5li7i0" path="res://scenes/user_interface/game_over/game_over.tscn" id="7_up0v7"]
+[ext_resource type="PackedScene" uid="uid://btcjpjyatk44o" path="res://scenes/user_interface/level_finished/level_finished.tscn" id="8_4xau6"]
 [ext_resource type="Shader" uid="uid://u2osdbsphxm5" path="res://shaders/prototype.gdshader" id="9_0xq57"]
 [ext_resource type="PackedScene" uid="uid://bivo5higswnar" path="res://scenes/levels/level_3/level_3.tscn" id="10_x6exq"]
 
@@ -88,14 +88,10 @@ script = ExtResource("4_ugaie")
 [node name="Orpheus" parent="Characters" node_paths=PackedStringArray("level") instance=ExtResource("5_iup6o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15225, 0.5, -0.941963)
 level = NodePath("../..")
-jump_peak_time = 0.35
-jump_fall_time = 0.45
 jump_distance = 3.0
 
 [node name="Eurydice" parent="Characters" instance=ExtResource("6_ses5c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.705197, 0.609505, -2.34757)
-jump_peak_time = 0.35
-jump_fall_time = 0.45
 jump_distance = 3.0
 
 [node name="Floor" type="GridMap" parent="."]
@@ -144,4 +140,5 @@ next_level_scene = ExtResource("10_x6exq")
 [connection signal="body_entered" from="FinishZone" to="." method="_on_finish_zone_body_entered"]
 
 [editable path="Characters/Eurydice"]
+[editable path="Characters/Eurydice/EurydiceInteractor"]
 [editable path="LevelFinished"]

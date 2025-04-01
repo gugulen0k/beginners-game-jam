@@ -22,27 +22,50 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	DebugUI.add_property('Orpheus movement dir', movement_direction)
-	DebugUI.add_property('Orpheus velocity X', velocity.x)
+	super._physics_process(delta)
+	
+	#DebugUI.add_property('Orpheus movement dir', movement_direction)
+	#DebugUI.add_property('Orpheus velocity X', velocity.x)
+	DebugUI.add_property("Orpheus current state", State.keys()[current_state])
+	DebugUI.add_property("Orpheus previous state", State.keys()[previous_state])
+	DebugUI.add_property("On floor", is_on_floor())
 	
 	if can_perform_actions():
 		handle_movement()
 		handle_jumping(delta)
 		handle_rotation()
-		
-		#if is_moving():
-			#orpheus_character.set_anim_state('walk')
-		#else:
-			#orpheus_character.set_anim_state('idle')
 	else:
 		stop()
+		current_state = State.IDLE
 		
 		if not is_eurydice_detected:
 			detect_eurydice()
-		#orpheus_character.set_anim_state('idle')
 	
+	if previous_state != current_state:
+		play_state_animation()
 	
 	move_and_slide()
+
+func play_state_animation():
+	match current_state:
+		State.IDLE:
+			orpheus_character.set_anim_state("idle")
+		State.WALKING:
+			orpheus_character.set_anim_state("walk")
+		State.JUMPING:
+			orpheus_character.set_anim_state("jump")
+		State.FALLING:
+			orpheus_character.set_anim_state("fall")
+		State.LANDING:
+			is_in_landing_animation = true
+			#orpheus_character.set_anim_state("landing")
+			#await orpheus_character.stop_animation()
+			is_in_landing_animation = false
+			
+			# Update state after landing animation
+			update_state()
+			play_state_animation()  # Play new state's animation
+
 
 
 func line(pos1: Vector3, pos2: Vector3, color = Color.WHITE_SMOKE, persist_ms = 1):
@@ -109,14 +132,13 @@ func detect_eurydice() -> void:
 				line(ray_start_position, ray_end_position, Color.RED)
 				is_eurydice_detected = true
 				level.game_over.emit()
-			#else:
-				#line(ray_start_position, ray_end_position, Color.ORANGE)
-		#else:
-			#line(ray_start_position, ray_end_position, Color.GREEN)
+			else:
+				line(ray_start_position, ray_end_position, Color.ORANGE)
+		else:
+			line(ray_start_position, ray_end_position, Color.GREEN)
 
 
 func move_into_final_area_position(marker_3d: Marker3D) -> void:
-	print('here')
 	InputSystem.can_use_orpheus = false
 	InputSystem.can_use_eurydice = false
 	

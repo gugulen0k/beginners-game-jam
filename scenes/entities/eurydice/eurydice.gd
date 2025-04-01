@@ -9,12 +9,12 @@ var landing_animation_playing: bool = false
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	
-	DebugUI.add_property('Eurydice velocity Y', velocity.y)
-	DebugUI.add_property('Eurydice movement direction', movement_direction)
-	DebugUI.add_property('Eurydice animation', animated_sprite.animation)
-	DebugUI.add_property("State", State.keys()[current_state])
-	DebugUI.add_property("On floor", is_on_floor())
-	
+	#DebugUI.add_property('Eurydice velocity Y', velocity.y)
+	#DebugUI.add_property('Eurydice movement direction', movement_direction)
+	#DebugUI.add_property('Eurydice animation', animated_sprite.animation)
+	#DebugUI.add_property("State", State.keys()[current_state])
+	#DebugUI.add_property("On floor", is_on_floor())
+	#
 	if can_perform_actions():
 		handle_movement()
 		handle_jumping(delta)
@@ -52,7 +52,7 @@ func play_state_animation():
 
 func handle_rotation() -> void:
 	if is_moving():
-		var base_scale = 0.65
+		var base_scale = .75
 		
 		var tween = get_tree().create_tween()
 		tween.tween_property(animated_sprite, 'scale:x', base_scale * (-1 if movement_direction < 0 else 1), 0.1)

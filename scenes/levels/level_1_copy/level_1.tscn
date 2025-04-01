@@ -1,0 +1,403 @@
+[gd_scene load_steps=30 format=3 uid="uid://ckyvsb88xn8rk"]
+
+[ext_resource type="Script" uid="uid://btga3hxw4vogx" path="res://scenes/levels/level_1/level_1.gd" id="1_1awx4"]
+[ext_resource type="PackedScene" uid="uid://ccnhpnpbmkad2" path="res://graphics/Level1.blend" id="2_uvmjj"]
+[ext_resource type="Shader" uid="uid://u2osdbsphxm5" path="res://shaders/prototype.gdshader" id="3_oy8m1"]
+[ext_resource type="Texture2D" uid="uid://ck0ohghopc3kb" path="res://2d_graphics/Cubes.png0011.png" id="4_363de"]
+[ext_resource type="Script" uid="uid://crawhy8swiqjc" path="res://scenes/entities/characters/characters.gd" id="5_dterr"]
+[ext_resource type="PackedScene" uid="uid://d0k1u5nvwlxh7" path="res://scenes/entities/orpheus/orpheus.tscn" id="6_hhcmt"]
+[ext_resource type="PackedScene" uid="uid://dsg4uckeyjsey" path="res://scenes/entities/eurydice/eurydice.tscn" id="7_fq55e"]
+[ext_resource type="PackedScene" uid="uid://owsmcq5li7i0" path="res://scenes/user_interface/game_over/game_over.tscn" id="8_d4n21"]
+[ext_resource type="AudioStream" uid="uid://d20qt0xaeyc5s" path="res://audio/ingame_music_without_lyre.mp3" id="9_o5wyt"]
+[ext_resource type="MeshLibrary" uid="uid://c2y2edkitxr22" path="res://graphics/level_building_blocks/meshlib.tres" id="10_ays3s"]
+[ext_resource type="PackedScene" uid="uid://btcjpjyatk44o" path="res://scenes/user_interface/level_finished/level_finished.tscn" id="11_7h14a"]
+[ext_resource type="PackedScene" uid="uid://dh7gsxed1hkcl" path="res://scenes/levels/level_2/level_2.tscn" id="12_d3lbp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fngju"]
+sky_top_color = Color(0.937343, 0.82717, 0.71197, 1)
+sky_horizon_color = Color(0.175814, 0.208016, 0.354428, 1)
+sky_curve = 0.113679
+ground_bottom_color = Color(0.176471, 0.207843, 0.352941, 1)
+ground_horizon_color = Color(0.176471, 0.207843, 0.352941, 1)
+
+[sub_resource type="Sky" id="Sky_58uyj"]
+sky_material = SubResource("ProceduralSkyMaterial_fngju")
+
+[sub_resource type="Environment" id="Environment_5o1mp"]
+background_mode = 2
+background_color = Color(0.670804, 0.557878, 0.508364, 1)
+sky = SubResource("Sky_58uyj")
+fog_sun_scatter = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6iamk"]
+render_priority = 0
+shader = ExtResource("3_oy8m1")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 1
+shader_parameter/base_color = Color(0.0646965, 0.0646965, 0.0646965, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 2.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 10.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = true
+shader_parameter/checkered_color = Color(0.321728, 0.321728, 0.321728, 1)
+shader_parameter/checkered_blend_color = 0.66
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_31rk5"]
+material = SubResource("ShaderMaterial_6iamk")
+size = Vector3(30, 1, 2.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w3g2g"]
+material = SubResource("ShaderMaterial_6iamk")
+size = Vector3(15, 1, 2.5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_31rk5"]
+data = PackedVector3Array(-5.0075, 0.5, -1.25, -5.0075, -0.5, -1.25, 5.0075, -0.5, -1.25, -5.0075, 0.5, 1.25, -5.0075, -0.5, 1.25, -5.0075, -0.5, -1.25, -5.0075, -0.5, 1.25, 5.0075, -0.5, 1.25, -5.0075, -0.5, -1.25, -5.0075, 0.5, -1.25, -5.0075, 0.5, 1.25, -5.0075, -0.5, -1.25, -5.0075, 0.5, 1.25, -5.0075, 0.5, -1.25, 5.0075, 0.5, -1.25, -5.0075, 0.5, 1.25, 5.0075, 0.5, 1.25, -5.0075, -0.5, 1.25, 5.0075, -0.5, 1.25, 5.0075, -0.5, -1.25, -5.0075, -0.5, -1.25, 5.0075, 0.5, -1.25, 5.0075, -0.5, -1.25, 5.0075, -0.5, 1.25, 5.0075, 0.5, 1.25, 5.0075, -0.5, 1.25, -5.0075, -0.5, 1.25, 5.0075, 0.5, -1.25, -5.0075, 0.5, -1.25, 5.0075, -0.5, -1.25, 5.0075, 0.5, 1.25, -5.0075, 0.5, 1.25, 5.0075, 0.5, -1.25, 5.0075, 0.5, 1.25, 5.0075, 0.5, -1.25, 5.0075, -0.5, 1.25)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oc4kc"]
+render_priority = 0
+shader = ExtResource("3_oy8m1")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 2
+shader_parameter/base_color = Color(0.0646965, 0.0646965, 0.0646965, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 5.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 10.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = true
+shader_parameter/checkered_color = Color(0.321728, 0.321728, 0.321728, 1)
+shader_parameter/checkered_blend_color = 0.66
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_3lh42"]
+material = SubResource("ShaderMaterial_oc4kc")
+size = Vector3(2.83, 1, 2.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_58uyj"]
+material = SubResource("ShaderMaterial_oc4kc")
+size = Vector3(4, 1, 2.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fngju"]
+material = SubResource("ShaderMaterial_6iamk")
+size = Vector3(7, 1, 2.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5o1mp"]
+material = SubResource("ShaderMaterial_6iamk")
+size = Vector3(5.115, 1, 2.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3g2g"]
+render_priority = 0
+shader = ExtResource("3_oy8m1")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 5
+shader_parameter/base_color = Color(0.0646965, 0.0646965, 0.0646965, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 5.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 10.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = true
+shader_parameter/checkered_color = Color(0.321728, 0.321728, 0.321728, 1)
+shader_parameter/checkered_blend_color = 0.66
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_spwf2"]
+material = SubResource("ShaderMaterial_w3g2g")
+size = Vector3(3, 0.5, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7uxs1"]
+size = Vector3(3, 0.5, 2.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ksju7"]
+render_priority = 0
+shader = ExtResource("3_oy8m1")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0.299547, 0.299547, 0.299547, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 2.0
+shader_parameter/grid_width = 0.0
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 0.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = true
+shader_parameter/checkered_color = Color(0.144063, 0.144063, 0.144062, 1)
+shader_parameter/checkered_blend_color = 0.5
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_ojo11"]
+material = SubResource("ShaderMaterial_ksju7")
+size = Vector3(28, 16.06, 1)
+
+[node name="Level1" type="Node3D" node_paths=PackedStringArray("game_over_scene", "level_finished_scene", "level_finish", "level_finish_marker", "level_music")]
+script = ExtResource("1_1awx4")
+game_over_scene = NodePath("GameOver")
+level_finished_scene = NodePath("LevelFinished")
+level_finish = NodePath("FinishZone")
+level_finish_marker = NodePath("FinishZone/FinishZone/Marker3D")
+level_music = NodePath("LevelMusic")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.462, 38)
+fov = 25.0
+size = 16.495
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5o1mp")
+
+[node name="Level1" parent="." instance=ExtResource("2_uvmjj")]
+transform = Transform3D(0.44, 0, 0, 0, 0.44, 0, 0, 0, 0.44, 0, -0.793856, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.4515, 0)
+light_color = Color(0.56953, 0.606005, 0.756581, 1)
+
+[node name="LevelBorders" type="Node3D" parent="."]
+visible = false
+
+[node name="TopBorder" type="CSGMesh3D" parent="LevelBorders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.4142, 0)
+layers = 12
+use_collision = true
+collision_layer = 12
+collision_mask = 0
+mesh = SubResource("BoxMesh_31rk5")
+
+[node name="BottomBorder" type="CSGMesh3D" parent="LevelBorders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+collision_layer = 12
+collision_mask = 0
+mesh = SubResource("BoxMesh_31rk5")
+
+[node name="LeftBorder" type="CSGMesh3D" parent="LevelBorders"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -14.5001, 7.46807, 0)
+layers = 12
+use_collision = true
+collision_layer = 12
+collision_mask = 0
+mesh = SubResource("BoxMesh_w3g2g")
+
+[node name="RightBorder" type="CSGMesh3D" parent="LevelBorders"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 14.4876, 7.46807, 0)
+layers = 12
+use_collision = true
+collision_layer = 12
+collision_mask = 0
+mesh = SubResource("BoxMesh_w3g2g")
+
+[node name="EurydiceObstacles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.417778, 9.28812, 0)
+visible = false
+
+[node name="StaticBody3D" type="StaticBody3D" parent="EurydiceObstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0271406, -0.0531712, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite3D2" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, 4.41188, -1.19562)
+texture = ExtResource("4_363de")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D3" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, 3.44612, -1.19562)
+texture = ExtResource("4_363de")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D4" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, 2.45664, -1.19562)
+texture = ExtResource("4_363de")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D5" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, 1.46716, -1.19562)
+texture = ExtResource("4_363de")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D6" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, 0.494741, -1.19562)
+texture = ExtResource("4_363de")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D7" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, -0.477677, -1.19562)
+texture = ExtResource("4_363de")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D8" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, -1.46716, -1.19562)
+texture = ExtResource("4_363de")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D9" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, -2.43958, -1.19562)
+texture = ExtResource("4_363de")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D10" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, -3.37787, -1.19562)
+texture = ExtResource("4_363de")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D11" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, -4.35029, -1.19562)
+texture = ExtResource("4_363de")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="Sprite3D12" type="Sprite3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, -4.48661, -1.19562)
+texture = ExtResource("4_363de")
+region_rect = Rect2(0, 0, 469, 157)
+
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="EurydiceObstacles/StaticBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_31rk5")
+
+[node name="OrpheusObstacles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.628544, 0)
+visible = false
+
+[node name="Floor1" type="CSGMesh3D" parent="OrpheusObstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5713, 4.38338, 0)
+use_collision = true
+collision_layer = 9
+collision_mask = 0
+mesh = SubResource("BoxMesh_3lh42")
+
+[node name="Floor2" type="CSGMesh3D" parent="OrpheusObstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9526, 4.38338, 0)
+use_collision = true
+collision_layer = 9
+collision_mask = 0
+mesh = SubResource("BoxMesh_58uyj")
+
+[node name="Floor3" type="CSGMesh3D" parent="OrpheusObstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9943, 4.38338, 0)
+use_collision = true
+collision_layer = 9
+collision_mask = 0
+mesh = SubResource("BoxMesh_58uyj")
+
+[node name="NormalObstacles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.628544, 0)
+visible = false
+
+[node name="Floor1" type="CSGMesh3D" parent="NormalObstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4997, 4.38338, 0)
+use_collision = true
+collision_layer = 12
+collision_mask = 0
+mesh = SubResource("BoxMesh_fngju")
+
+[node name="Floor2" type="CSGMesh3D" parent="NormalObstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.59882, 4.38338, 0)
+use_collision = true
+collision_layer = 12
+collision_mask = 0
+mesh = SubResource("BoxMesh_5o1mp")
+
+[node name="Floor3" type="CSGMesh3D" parent="NormalObstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.47868, 4.38338, 0)
+use_collision = true
+collision_layer = 12
+collision_mask = 0
+mesh = SubResource("BoxMesh_5o1mp")
+
+[node name="FinishZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.47868, 4.52527, 0)
+collision_layer = 3
+collision_mask = 3
+
+[node name="FinishZone" type="CSGMesh3D" parent="FinishZone"]
+mesh = SubResource("BoxMesh_spwf2")
+
+[node name="Marker3D" type="Marker3D" parent="FinishZone/FinishZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.207183, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FinishZone"]
+shape = SubResource("BoxShape3D_7uxs1")
+
+[node name="Background" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.72294, -1.75014)
+visible = false
+layers = 4
+mesh = SubResource("BoxMesh_ojo11")
+
+[node name="Characters" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.522, 5.74035, 0.681326)
+script = ExtResource("5_dterr")
+
+[node name="Orpheus" parent="Characters" node_paths=PackedStringArray("level") instance=ExtResource("6_hhcmt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0358415, -0.632017)
+level = NodePath("../..")
+jump_peak_time = 0.35
+jump_fall_time = 0.45
+jump_distance = 3.0
+
+[node name="Eurydice" parent="Characters" instance=ExtResource("7_fq55e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.41326, 0.118717, -1.87841)
+jump_peak_time = 0.35
+jump_fall_time = 0.45
+jump_distance = 3.0
+
+[node name="GameOver" parent="." instance=ExtResource("8_d4n21")]
+visible = false
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_o5wyt")
+
+[node name="FloorAndCeiling" type="GridMap" parent="."]
+visible = false
+mesh_library = ExtResource("10_ays3s")
+cell_size = Vector3(1, 1, 1)
+collision_layer = 0
+collision_mask = 0
+data = {
+"cells": PackedInt32Array(-15, 65535, 2, -15, 0, 2, -14, 65535, 2, -14, 0, 2, -13, 65535, 2, -13, 0, 2, -12, 65535, 2, -12, 0, 2, -11, 65535, 2, -11, 0, 2, -10, 65535, 2, -10, 0, 2, -9, 65535, 2, -9, 0, 2, -8, 65535, 2, -8, 0, 2, -7, 65535, 2, -7, 0, 2, -6, 65535, 2, -6, 0, 2, -5, 65535, 2, -5, 0, 2, -4, 65535, 2, -4, 0, 2, -3, 65535, 2, -3, 0, 2, -2, 65535, 2, -2, 0, 2, -1, 65535, 2, -1, 0, 2, -65536, 65535, 2, -65536, 0, 2, -65535, 65535, 2, -65535, 0, 2, -65534, 65535, 2, -65534, 0, 2, -65533, 65535, 2, -65533, 0, 2, -65532, 65535, 2, -65532, 0, 2, -65531, 65535, 2, -65531, 0, 2, -65530, 65535, 2, -65530, 0, 2, -65529, 65535, 2, -65529, 0, 2, -65528, 65535, 2, -65528, 0, 2, -65527, 65535, 2, -65527, 0, 2, -65526, 65535, 2, -65526, 0, 2, -65525, 65535, 2, -65525, 0, 2, -65524, 65535, 2, -65524, 0, 2, -65523, 65535, 2, -65523, 0, 2, -65522, 65535, 2, -65522, 0, 2, 65521, 65535, 2, 65521, 0, 2, 14, 65535, 2, 14, 0, 2, 65550, 65535, 2, 65550, 0, 2, 131057, 65535, 2, 131057, 0, 2, 196593, 65535, 2, 196593, 0, 2, 131086, 65535, 2, 131086, 0, 2, 196622, 65535, 2, 196622, 0, 2, 262129, 65535, 2, 262129, 0, 2, 262158, 65535, 2, 262158, 0, 2, 327665, 65535, 2, 327665, 0, 2, 327694, 65535, 2, 327694, 0, 2, 393201, 65535, 2, 393201, 0, 2, 393230, 65535, 2, 393230, 0, 2, 458737, 65535, 2, 458737, 0, 2, 458766, 65535, 2, 458766, 0, 2, 524273, 65535, 2, 524273, 0, 2, 524302, 65535, 2, 524302, 0, 2, 589809, 65535, 2, 589809, 0, 2, 589838, 65535, 2, 589838, 0, 2, 655345, 65535, 2, 655345, 0, 2, 655374, 65535, 2, 655374, 0, 2, 720881, 65535, 2, 720881, 0, 2, 720910, 65535, 2, 720910, 0, 2, 786417, 65535, 2, 786417, 0, 2, 786446, 65535, 2, 786446, 0, 2, 851953, 65535, 2, 851953, 0, 2, 851982, 65535, 2, 851982, 0, 2, 917489, 65535, 2, 917489, 0, 2, 917518, 65535, 2, 917518, 0, 2, 983025, 65535, 2, 983025, 0, 2, 983054, 65535, 2, 983054, 0, 2, 1048561, 65535, 2, 1048561, 0, 2, 1114097, 65535, 2, 1114097, 0, 2, 1114098, 65535, 2, 1114098, 0, 2, 1114099, 65535, 2, 1114099, 0, 2, 1114100, 65535, 2, 1114100, 0, 2, 1114101, 65535, 2, 1114101, 0, 2, 1114102, 65535, 2, 1114102, 0, 2, 1114103, 65535, 2, 1114103, 0, 2, 1114104, 65535, 2, 1114104, 0, 2, 1114105, 65535, 2, 1114105, 0, 2, 1114106, 65535, 2, 1114106, 0, 2, 1114107, 65535, 2, 1114107, 0, 2, 1114108, 65535, 2, 1114108, 0, 2, 1114109, 65535, 2, 1114109, 0, 2, 1114110, 65535, 2, 1114110, 0, 2, 1114111, 65535, 2, 1114111, 0, 2, 1048576, 65535, 2, 1048576, 0, 2, 1048577, 65535, 2, 1048577, 0, 2, 1048578, 65535, 2, 1048578, 0, 2, 1048579, 65535, 2, 1048579, 0, 2, 1048580, 65535, 2, 1048580, 0, 2, 1048581, 65535, 2, 1048581, 0, 2, 1048582, 65535, 2, 1048582, 0, 2, 1048583, 65535, 2, 1048583, 0, 2, 1048584, 65535, 2, 1048584, 0, 2, 1048585, 65535, 2, 1048585, 0, 2, 1048586, 65535, 2, 1048586, 0, 2, 1048587, 65535, 2, 1048587, 0, 2, 1048588, 65535, 2, 1048588, 0, 2, 1048589, 65535, 2, 1048589, 0, 2, 1048590, 65535, 2, 1048590, 0, 2, 262130, 65535, 2, 262130, 0, 2, 262131, 65535, 2, 262131, 0, 2, 262132, 65535, 2, 262132, 0, 2, 262133, 65535, 2, 262133, 0, 2, 262134, 65535, 2, 262134, 0, 2, 262135, 65535, 2, 262135, 0, 2, 262136, 65535, 2, 262136, 0, 2, 262129, 1, 2, 262130, 1, 2, 262131, 1, 2, 262132, 1, 2, 262133, 1, 2, 262134, 1, 2, 262135, 1, 2, 262136, 1, 2)
+}
+metadata/_editor_floor_ = Vector3(0, 3, 0)
+
+[node name="LevelFinished" parent="." instance=ExtResource("11_7h14a")]
+visible = false
+
+[node name="NextLevel" parent="LevelFinished/CenterContainer/VSplitContainer/ButtonsContainer" index="0"]
+next_level_scene = ExtResource("12_d3lbp")
+
+[connection signal="body_entered" from="FinishZone" to="." method="_on_finish_zone_body_entered"]
+
+[editable path="LevelFinished"]

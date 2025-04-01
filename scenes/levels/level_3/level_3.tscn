@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bivo5higswnar"]
+[gd_scene load_steps=20 format=3 uid="uid://bivo5higswnar"]
 
 [ext_resource type="Script" uid="uid://ddwklxdbqbpbd" path="res://scenes/levels/level_2/level_2.gd" id="1_4a2mx"]
 [ext_resource type="AudioStream" uid="uid://d20qt0xaeyc5s" path="res://audio/ingame_music_without_lyre.mp3" id="2_0egms"]
@@ -6,9 +6,10 @@
 [ext_resource type="Script" uid="uid://crawhy8swiqjc" path="res://scenes/entities/characters/characters.gd" id="4_xuipq"]
 [ext_resource type="PackedScene" uid="uid://d0k1u5nvwlxh7" path="res://scenes/entities/orpheus/orpheus.tscn" id="5_sq7nu"]
 [ext_resource type="PackedScene" uid="uid://dsg4uckeyjsey" path="res://scenes/entities/eurydice/eurydice.tscn" id="6_7qoks"]
-[ext_resource type="PackedScene" uid="uid://owsmcq5li7i0" path="res://scenes/user interface/game_over/game_over.tscn" id="7_ko14o"]
-[ext_resource type="PackedScene" uid="uid://btcjpjyatk44o" path="res://scenes/user interface/level_finished/level_finished.tscn" id="8_odh1l"]
-[ext_resource type="PackedScene" uid="uid://cm8ep7kvlg0w0" path="res://scenes/gates/eurydice_gate.tscn" id="9_qra2n"]
+[ext_resource type="PackedScene" uid="uid://owsmcq5li7i0" path="res://scenes/user_interface/game_over/game_over.tscn" id="7_ko14o"]
+[ext_resource type="PackedScene" uid="uid://btcjpjyatk44o" path="res://scenes/user_interface/level_finished/level_finished.tscn" id="8_odh1l"]
+[ext_resource type="PackedScene" uid="uid://cm8ep7kvlg0w0" path="res://scenes/level_props/eurydice_gate.tscn" id="9_qra2n"]
+[ext_resource type="PackedScene" uid="uid://c3ve10ja1p7ah" path="res://scenes/level_props/interactable_pot.tscn" id="10_rr702"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tf87b"]
 sky_top_color = Color(0.937343, 0.82717, 0.71197, 1)
@@ -105,14 +106,10 @@ script = ExtResource("4_xuipq")
 [node name="Orpheus" parent="Characters" node_paths=PackedStringArray("level") instance=ExtResource("5_sq7nu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15225, 0.510713, -0.941963)
 level = NodePath("../..")
-jump_peak_time = 0.35
-jump_fall_time = 0.45
 jump_distance = 3.0
 
 [node name="Eurydice" parent="Characters" instance=ExtResource("6_7qoks")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.609897, -2.34757)
-jump_peak_time = 0.35
-jump_fall_time = 0.45
 jump_distance = 3.0
 
 [node name="Area3D" type="Area3D" parent="."]
@@ -145,5 +142,8 @@ next_level_scene = SubResource("PackedScene_x3r7r")
 
 [node name="EurydiceGate" parent="." instance=ExtResource("9_qra2n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99439, 5.49681, 0.5)
+
+[node name="InteractablePot" parent="." instance=ExtResource("10_rr702")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.583714, 6.50257, 0.495303)
 
 [editable path="LevelFinished"]

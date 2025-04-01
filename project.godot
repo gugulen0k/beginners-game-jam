@@ -20,6 +20,7 @@ DebugUI="*res://global_scripts/debug/debug.tscn"
 GlobalScenes="*res://global_scripts/global_scenes/global_scenes.tscn"
 SceneLoading="*res://global_scripts/scene_loading.gd"
 InputSystem="*res://global_scripts/input_system.gd"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [display]
 
@@ -27,6 +28,10 @@ window/size/viewport_width=2560
 window/size/viewport_height=1440
 window/size/always_on_top=true
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [input]
 
@@ -45,17 +50,25 @@ jump={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"location":0,"echo":false,"script":null)
 ]
 }
+interact={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"location":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
+3d_render/layer_1="border"
 3d_physics/layer_1="orpheus"
 3d_physics/layer_2="eurydice"
 3d_physics/layer_3="character"
 3d_physics/layer_4="raycast_hittable"
+3d_physics/layer_5="interactable"
 
 [physics]
 
 3d/physics_engine="Jolt Physics"
+common/physics_interpolation=true
 
 [rendering]
 
