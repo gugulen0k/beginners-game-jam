@@ -21,7 +21,15 @@ var is_able_to_perform_actions: bool
 var is_jumping: bool = false
 
 # State Machine related variables
-enum State { IDLE, WALKING, JUMPING, FALLING, LANDING }
+enum State { 
+	IDLE,
+	WALKING,
+	JUMPING,
+	FALLING,
+	LANDING,
+	LYRE,
+	LYRE_TAKEOUT
+}
 var current_state: State = State.IDLE
 var previous_state: State = State.IDLE
 var was_on_floor: bool = true
@@ -74,9 +82,12 @@ func stop() -> void:
 
 
 func update_state() -> void:
+	if not is_able_to_perform_actions:
+		return
+		
 	if is_in_landing_animation:
 		return  # Don't change state during landing animation
-	
+		
 	if not is_on_floor():
 		if velocity.y > 0:
 			current_state = State.JUMPING
@@ -90,8 +101,6 @@ func update_state() -> void:
 		current_state = State.IDLE
 
 func handle_jumping(delta: float) -> void:
-	
-
 	if not is_on_floor():
 		if velocity.y > 0:
 			velocity.y -= jump_gravity * delta

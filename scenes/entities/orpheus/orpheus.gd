@@ -16,6 +16,7 @@ const SETTLE_ANIMATION_SPEED: float = 2
 
 var is_eurydice_detected: bool = false
 
+
 func _ready() -> void:
 	super._ready()
 	transform.basis = Basis.looking_at(Vector3.RIGHT)
@@ -26,6 +27,7 @@ func _physics_process(delta: float) -> void:
 	
 	#DebugUI.add_property('Orpheus movement dir', movement_direction)
 	#DebugUI.add_property('Orpheus velocity X', velocity.x)
+	DebugUI.add_property('Current animation', orpheus_character.get_anim_state())
 	DebugUI.add_property("Orpheus current state", State.keys()[current_state])
 	DebugUI.add_property("Orpheus previous state", State.keys()[previous_state])
 	DebugUI.add_property("On floor", is_on_floor())
@@ -56,6 +58,10 @@ func play_state_animation():
 			orpheus_character.set_anim_state("jump")
 		State.FALLING:
 			orpheus_character.set_anim_state("fall")
+		State.LYRE:
+			orpheus_character.set_anim_state("lyre")
+		State.LYRE_TAKEOUT:
+			orpheus_character.set_anim_state("lyre_takeout")
 		State.LANDING:
 			is_in_landing_animation = true
 			#orpheus_character.set_anim_state("landing")
@@ -109,38 +115,42 @@ enum CollisionLayers {
 }
 
 func detect_eurydice() -> void:
-	var space_state = get_world_3d().direct_space_state
+	var space_state := get_world_3d().direct_space_state
 	# ray start position is in global space
-	var ray_start_position = to_global(raycasts_origin.position)
-	var ray_cone_start_direction = (gaze_cone_start.global_position - ray_start_position).normalized()
-	var ray_cone_end_direction = (gaze_cone_end.global_position - ray_start_position).normalized()
+	var ray_start_position := to_global(raycasts_origin.position)
+	var ray_cone_start_direction := (gaze_cone_start.global_position - ray_start_position).normalized()
+	var ray_cone_end_direction := (gaze_cone_end.global_position - ray_start_position).normalized()
 	
 	for i in range(RAYS_COUNT):
-		var t = float(i) / (RAYS_COUNT - 1) # Normalized value from 0.0 to 1.0
-		var interpolated_ray_direction = ray_cone_start_direction.lerp(ray_cone_end_direction, t)
+		var t := float(i) / (RAYS_COUNT - 1) # Normalized value from 0.0 to 1.0
+		var interpolated_ray_direction := ray_cone_start_direction.lerp(ray_cone_end_direction, t)
 		
 		# ray end position is the ray start position + the movement vector from that position
-		var ray_end_position = ray_start_position + interpolated_ray_direction * RAY_LENGTH
+		var ray_end_position := ray_start_position + interpolated_ray_direction * RAY_LENGTH
 		
-		var query = PhysicsRayQueryParameters3D.create(ray_start_position, ray_end_position, CollisionLayers.RAYCAST_HITTABLE)
+		var query := PhysicsRayQueryParameters3D.create(ray_start_position, ray_end_position, CollisionLayers.RAYCAST_HITTABLE)
 		query.hit_from_inside = true
 		
 		var result := space_state.intersect_ray(query)
 		# for seeing the ray
 		if (result):
 			if (result.collider.name == "Eurydice"):
-				line(ray_start_position, ray_end_position, Color.RED)
+				#line(ray_start_position, ray_end_position, Color.RED)
 				is_eurydice_detected = true
 				level.game_over.emit()
-			else:
-				line(ray_start_position, ray_end_position, Color.ORANGE)
-		else:
-			line(ray_start_position, ray_end_position, Color.GREEN)
+			#else:
+				#line(ray_start_position, ray_end_position, Color.ORANGE)
+		#else:
+			#line(ray_start_position, ray_end_position, Color.GREEN)
 
 
 func move_into_final_area_position(marker_3d: Marker3D) -> void:
 	InputSystem.can_use_orpheus = false
 	InputSystem.can_use_eurydice = false
+	
+	print('current_state before: ' + str(current_state))
+	current_state = State.WALKING
+	print('current_state after: ' + str(current_state))
 	
 	var tween = get_tree().create_tween()
 	# will change the global position to the marker 3d global position over the SETTLE_ANIMATION_SPEED in seconds
@@ -152,7 +162,8 @@ func move_into_final_area_position(marker_3d: Marker3D) -> void:
 
 func on_move_into_final_area_finished() -> void:
 	transform.basis = transform.basis.looking_at(Vector3.LEFT)
-	#orpheus_character.set_anim_state('idle')
+	current_state = State.LYRE_TAKEOUT
+	print('current_state play_lyre: ' + str(current_state))
 	
 	InputSystem.can_use_eurydice = true
 	InputSystem.can_use_orpheus = false

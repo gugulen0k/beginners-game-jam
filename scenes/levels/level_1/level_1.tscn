@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://naeqc07b6qct"]
+[gd_scene load_steps=39 format=3 uid="uid://naeqc07b6qct"]
 
 [ext_resource type="Script" uid="uid://btga3hxw4vogx" path="res://scenes/levels/level_1/level_1.gd" id="1_fngju"]
 [ext_resource type="Shader" uid="uid://u2osdbsphxm5" path="res://shaders/prototype.gdshader" id="1_x3ahk"]
@@ -13,7 +13,30 @@
 [ext_resource type="PackedScene" uid="uid://cjaun6rw4naar" path="res://graphics/Level1.glb" id="12_napug"]
 [ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="13_wfdrs"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_ldw0e"]
+[ext_resource type="Texture2D" uid="uid://cv8f7hqqmvswu" path="res://graphics/backgroun_textures/asdaaa.png" id="15_rmnd1"]
 [ext_resource type="Script" uid="uid://b8hhnqsugykly" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="15_wfdrs"]
+[ext_resource type="Texture2D" uid="uid://dpjpd6vj6dyqw" path="res://graphics/backgroun_textures/asdaaa2.png" id="16_wloe5"]
+[ext_resource type="Texture2D" uid="uid://dhqfar55h5nuq" path="res://graphics/backgroun_textures/asdaaa3.png" id="17_8spg0"]
+
+[sub_resource type="Resource" id="Resource_hhmec"]
+script = ExtResource("14_ldw0e")
+duration = 1.0
+transition = 0
+ease = 0
+
+[sub_resource type="Resource" id="Resource_wfdrs"]
+script = ExtResource("15_wfdrs")
+keep_aspect = 1
+cull_mask = 1048575
+h_offset = 0.0
+v_offset = 0.0
+projection = 0
+fov = 25.0
+size = 1.0
+frustum_offset = Vector2(0, 0)
+near = 0.05
+far = 4000.0
+metadata/_custom_type_script = "uid://b8hhnqsugykly"
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fngju"]
 sky_top_color = Color(0.937343, 0.82717, 0.71197, 1)
@@ -75,26 +98,6 @@ size = Vector3(3, 0.5, 2.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_7uxs1"]
 size = Vector3(3, 0.5, 2.5)
 
-[sub_resource type="Resource" id="Resource_rmnd1"]
-script = ExtResource("14_ldw0e")
-duration = 1.0
-transition = 0
-ease = 2
-
-[sub_resource type="Resource" id="Resource_ldw0e"]
-script = ExtResource("15_wfdrs")
-keep_aspect = 1
-cull_mask = 1048575
-h_offset = 0.0
-v_offset = 0.0
-projection = 0
-fov = 25.0
-size = 1.0
-frustum_offset = Vector2(0, 0)
-near = 0.05
-far = 4000.0
-metadata/_custom_type_script = "uid://b8hhnqsugykly"
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_hhmec"]
 size = Vector3(6.05908, 1, 3.33344)
 
@@ -124,17 +127,49 @@ size = Vector3(0.850271, 9.75586, 3.33344)
 [sub_resource type="BoxShape3D" id="BoxShape3D_rmnd1"]
 size = Vector3(44.1586, 1, 3.33344)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rmnd1"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wloe5"]
+material = SubResource("StandardMaterial3D_rmnd1")
+size = Vector2(22.215, 18.28)
+orientation = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wloe5"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8spg0"]
+material = SubResource("StandardMaterial3D_wloe5")
+size = Vector2(90.17, 18.28)
+orientation = 2
+
 [node name="Level1" type="Node3D" node_paths=PackedStringArray("game_over_scene", "level_finished_scene", "level_finish", "level_finish_marker", "level_music")]
 script = ExtResource("1_fngju")
 game_over_scene = NodePath("GameOver")
 level_finished_scene = NodePath("LevelFinished")
 level_finish = NodePath("FinishZone")
-level_finish_marker = NodePath("FinishZone/FinishZone/Marker3D")
+level_finish_marker = NodePath("FinishZone/Marker3D")
 level_music = NodePath("LevelMusic")
+
+[node name="PhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_targets", "look_at_targets")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999994, -4.75937, 8.20645, 56.3648)
+top_level = true
+script = ExtResource("13_wfdrs")
+follow_mode = 3
+follow_targets = [NodePath("../Characters/Eurydice"), NodePath("../Characters/Orpheus")]
+look_at_mode = 3
+look_at_targets = [NodePath("../Characters/Orpheus"), NodePath("../Characters/Eurydice")]
+tween_resource = SubResource("Resource_hhmec")
+tween_on_load = false
+camera_3d_resource = SubResource("Resource_wfdrs")
+follow_offset = Vector3(0, 0, 53.61)
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 physics_interpolation_mode = 1
-transform = Transform3D(0.999951, -1.29891e-05, -0.00985536, 4.54747e-13, 0.999999, -0.00131797, 0.00985537, 0.0013179, 0.999951, 0, 8.205, 66.04)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75937, 8.20645, 56.3648)
 fov = 25.0
 
 [node name="PhantomCameraHost" type="Node" parent="Camera3D"]
@@ -155,11 +190,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5045, 6.80644, 1.27609)
 collision_layer = 3
 collision_mask = 3
 
-[node name="FinishZone" type="CSGMesh3D" parent="FinishZone"]
-mesh = SubResource("BoxMesh_spwf2")
-
-[node name="Marker3D" type="Marker3D" parent="FinishZone/FinishZone"]
+[node name="Marker3D" type="Marker3D" parent="FinishZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.207183, 0)
+
+[node name="FinishZone" type="CSGMesh3D" parent="FinishZone"]
+visible = false
+mesh = SubResource("BoxMesh_spwf2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FinishZone"]
 shape = SubResource("BoxShape3D_7uxs1")
@@ -213,18 +249,6 @@ light_color = Color(0.0941176, 0.909804, 0.678431, 1)
 light_energy = 5.0
 omni_range = 2.172
 omni_attenuation = 2.5
-
-[node name="PhantomCamera3D" type="Node3D" parent="."]
-transform = Transform3D(0.997109, 1.67922e-06, 0.0741505, 1.13671e-13, 0.999828, -2.26438e-05, -0.0741504, 2.25806e-05, 0.99711, 0, 8.205, 66.04)
-script = ExtResource("13_wfdrs")
-look_at_mode = 3
-tween_resource = SubResource("Resource_rmnd1")
-tween_on_load = false
-host_layers = 0
-camera_3d_resource = SubResource("Resource_ldw0e")
-follow_offset = Vector3(0, 0, 63)
-follow_axis_lock = 1
-metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5826, 6.08967, 1.2036)
@@ -322,6 +346,40 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TopBorder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8537, 0, 0)
 shape = SubResource("BoxShape3D_rmnd1")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5167, 11.8784, -0.207078)
+light_color = Color(0.686446, 0.40688, 0.196218, 1)
+omni_range = 8.09428
+omni_attenuation = 0.0
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(3.53, 0, 0, 0, 3.53, 0, 0, 0, 3.53, -2.87773, 8.36579, -7.4997)
+texture = ExtResource("15_rmnd1")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(3.53, 0, 0, 0, 3.53, 0, 0, 0, 3.53, -12.104, 8.36579, -10.1879)
+texture = ExtResource("16_wloe5")
+
+[node name="Sprite3D3" type="Sprite3D" parent="."]
+transform = Transform3D(3.53, 0, 0, 0, 3.53, 0, 0, 0, 3.53, -18.5157, 8.36579, -11.4539)
+texture = ExtResource("17_8spg0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.8282, 8.90185, 4.46234)
+mesh = SubResource("PlaneMesh_wloe5")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.130962, 27.0429, 4.46234)
+mesh = SubResource("PlaneMesh_8spg0")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.130962, -9.2689, 4.46234)
+mesh = SubResource("PlaneMesh_8spg0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.1425, 8.84869, 4.46234)
+mesh = SubResource("PlaneMesh_wloe5")
 
 [connection signal="body_entered" from="FinishZone" to="." method="_on_finish_zone_body_entered"]
 

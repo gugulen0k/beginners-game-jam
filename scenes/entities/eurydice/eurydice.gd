@@ -26,7 +26,6 @@ func _physics_process(delta: float) -> void:
 	if previous_state != current_state:
 		play_state_animation()
 
-	old_movement_direction = movement_direction
 	move_and_slide()
 	
 func play_state_animation():
