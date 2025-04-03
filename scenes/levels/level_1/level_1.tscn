@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://naeqc07b6qct"]
+[gd_scene load_steps=43 format=3 uid="uid://naeqc07b6qct"]
 
 [ext_resource type="Script" uid="uid://btga3hxw4vogx" path="res://scenes/levels/level_1/level_1.gd" id="1_fngju"]
 [ext_resource type="Shader" uid="uid://u2osdbsphxm5" path="res://shaders/prototype.gdshader" id="1_x3ahk"]
@@ -9,10 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://owsmcq5li7i0" path="res://scenes/user_interface/game_over/game_over.tscn" id="6_3lh42"]
 [ext_resource type="AudioStream" uid="uid://d20qt0xaeyc5s" path="res://audio/ingame_music_without_lyre.mp3" id="7_vmhy7"]
 [ext_resource type="PackedScene" uid="uid://btcjpjyatk44o" path="res://scenes/user_interface/level_finished/level_finished.tscn" id="10_w3g2g"]
-[ext_resource type="PackedScene" uid="uid://dh7gsxed1hkcl" path="res://scenes/levels/level_2/level_2.tscn" id="11_napug"]
-[ext_resource type="PackedScene" uid="uid://cjaun6rw4naar" path="res://graphics/Level1.glb" id="12_napug"]
+[ext_resource type="PackedScene" uid="uid://c6i4vekh2h3ud" path="res://scenes/levels/level_2/level_2.tscn" id="11_napug"]
+[ext_resource type="AudioStream" uid="uid://bghtinrdlhol0" path="res://audio/lyre.mp3" id="12_wloe5"]
+[ext_resource type="AudioStream" uid="uid://m3njrsv7pf5r" path="res://audio/game_over.mp3" id="13_8spg0"]
+[ext_resource type="PackedScene" uid="uid://pu8dotn6lh6u" path="res://graphics/levels/Level1.glb" id="13_ldw0e"]
 [ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="13_wfdrs"]
+[ext_resource type="AudioStream" uid="uid://nwhr4cbxtbar" path="res://audio/level_finished.mp3" id="14_5d3u7"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_ldw0e"]
+[ext_resource type="AudioStream" uid="uid://cju6ryjgixh5p" path="res://audio/cave_ambience.mp3" id="15_41r28"]
 [ext_resource type="Texture2D" uid="uid://cv8f7hqqmvswu" path="res://graphics/backgroun_textures/asdaaa.png" id="15_rmnd1"]
 [ext_resource type="Script" uid="uid://b8hhnqsugykly" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="15_wfdrs"]
 [ext_resource type="Texture2D" uid="uid://dpjpd6vj6dyqw" path="res://graphics/backgroun_textures/asdaaa2.png" id="16_wloe5"]
@@ -145,22 +149,25 @@ material = SubResource("StandardMaterial3D_wloe5")
 size = Vector2(90.17, 18.28)
 orientation = 2
 
-[node name="Level1" type="Node3D" node_paths=PackedStringArray("game_over_scene", "level_finished_scene", "level_finish", "level_finish_marker", "level_music")]
+[node name="Level1" type="Node3D" node_paths=PackedStringArray("game_over_scene", "level_finished_scene", "level_finish", "level_finish_marker", "level_music", "level_music_lyre", "game_over_music", "level_finished_music", "cave_ambience")]
 script = ExtResource("1_fngju")
 game_over_scene = NodePath("GameOver")
 level_finished_scene = NodePath("LevelFinished")
 level_finish = NodePath("FinishZone")
 level_finish_marker = NodePath("FinishZone/Marker3D")
 level_music = NodePath("LevelMusic")
+level_music_lyre = NodePath("LevelMusicLyre")
+game_over_music = NodePath("GameOverMusic")
+level_finished_music = NodePath("LevelFinishedMusic")
+cave_ambience = NodePath("CaveAmbience")
 
-[node name="PhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_targets", "look_at_targets")]
+[node name="PhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_targets")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999994, -4.75937, 8.20645, 56.3648)
 top_level = true
 script = ExtResource("13_wfdrs")
 follow_mode = 3
 follow_targets = [NodePath("../Characters/Eurydice"), NodePath("../Characters/Orpheus")]
 look_at_mode = 3
-look_at_targets = [NodePath("../Characters/Orpheus"), NodePath("../Characters/Eurydice")]
 tween_resource = SubResource("Resource_hhmec")
 tween_on_load = false
 camera_3d_resource = SubResource("Resource_wfdrs")
@@ -217,16 +224,26 @@ visible = false
 [node name="LevelMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_vmhy7")
 
+[node name="LevelMusicLyre" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_wloe5")
+
+[node name="GameOverMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_8spg0")
+
+[node name="LevelFinishedMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_5d3u7")
+
+[node name="CaveAmbience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_41r28")
+
 [node name="LevelFinished" parent="." instance=ExtResource("10_w3g2g")]
 visible = false
 
 [node name="NextLevel" parent="LevelFinished/CenterContainer/VSplitContainer/ButtonsContainer" index="0"]
 next_level_scene = ExtResource("11_napug")
 
-[node name="Level1" parent="." instance=ExtResource("12_napug")]
+[node name="Level1" parent="." instance=ExtResource("13_ldw0e")]
 transform = Transform3D(0.46, 0, 0, 0, 0.46, 0, 0, 0, 0.46, 0, 0, 0)
-
-[node name="Node3D" type="Node3D" parent="."]
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(0.00164905, -0.743351, 0.6689, -0.597004, 0.535886, 0.597003, -0.802237, -0.40032, -0.442899, 7, 21.8051, -12)
@@ -347,12 +364,6 @@ collision_mask = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8537, 0, 0)
 shape = SubResource("BoxShape3D_rmnd1")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5167, 11.8784, -0.207078)
-light_color = Color(0.686446, 0.40688, 0.196218, 1)
-omni_range = 8.09428
-omni_attenuation = 0.0
-
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(3.53, 0, 0, 0, 3.53, 0, 0, 0, 3.53, -2.87773, 8.36579, -7.4997)
 texture = ExtResource("15_rmnd1")
@@ -380,6 +391,14 @@ mesh = SubResource("PlaneMesh_8spg0")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.1425, 8.84869, 4.46234)
 mesh = SubResource("PlaneMesh_wloe5")
+
+[node name="DoorLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7124, 8.72585, -1.61567)
+light_color = Color(0.339299, 0.507581, 0.630043, 1)
+light_energy = 6.94
+light_specular = 2.0
+omni_range = 5.2323
+omni_attenuation = -0.045
 
 [connection signal="body_entered" from="FinishZone" to="." method="_on_finish_zone_body_entered"]
 

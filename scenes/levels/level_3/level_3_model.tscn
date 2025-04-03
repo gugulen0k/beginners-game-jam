@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3rix0l00s4aa"]
+
+[ext_resource type="PackedScene" uid="uid://dcpoddgvr6j1l" path="res://graphics/levels/Level3.glb" id="1_w1ct6"]
+[ext_resource type="Script" uid="uid://dior3kua5pwco" path="res://scenes/levels/level_3/level_3_model.gd" id="2_a332a"]
+
+[node name="LevelModel" instance=ExtResource("1_w1ct6")]
+script = ExtResource("2_a332a")
+
+[node name="Cylinder_005" parent="." index="7"]
+transform = Transform3D(8.28968e-08, 8.8416e-09, -0.278156, -8.8416e-09, -0.278156, -8.8416e-09, -0.278156, 8.8416e-09, -8.28968e-08, 10.5796, 23.9882, 2.39051)

@@ -13,7 +13,7 @@ signal game_over
 
 func _ready() -> void:
 	game_over.connect(_on_game_over)
-	level_music.play() # Enable level music
+	#level_music.play() # Enable level music
 	
 	# ----- Enable movement for both characters ----
 	InputSystem.can_use_eurydice = true
@@ -24,7 +24,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	DebugUI.add_property('Characters on finish', level_finish.get_overlapping_bodies())
+	#DebugUI.add_property('Characters on finish', level_finish.get_overlapping_bodies())
 	
 	var characters_on_finish := level_finish.get_overlapping_bodies()
 	
@@ -35,11 +35,6 @@ func _physics_process(delta: float) -> void:
 		# -----------------------------------------------
 		
 		level_finished_scene.show()
-
-
-func _on_finish_zone_body_entered(character: Character) -> void:
-	if character is Orpheus:
-		character.move_into_final_area_position(level_finish_marker)
 
 
 func _on_game_over() -> void:
@@ -86,3 +81,8 @@ func set_siglans_for_ui_btns() -> void:
 	var lf_next_level_btn = level_finished_scene.next_level_btn
 	lf_next_level_btn.pressed.connect(_on_next_level_pressed)
 	# --------------------------------------------------------------
+
+
+func _on_finish_zone_body_entered(character: Character) -> void:
+	if character is Orpheus:
+		character.move_into_final_area_position(level_finish_marker)

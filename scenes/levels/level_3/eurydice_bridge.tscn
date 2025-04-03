@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://chlk3ppqau4o4"]
+
+[ext_resource type="PackedScene" uid="uid://dgs8owitxf1yw" path="res://graphics/levels/bridge.glb" id="1_bjl2q"]
+[ext_resource type="Script" uid="uid://bpa27p2isyds" path="res://scenes/levels/level_3/eurydice_bridge.gd" id="2_pku4e"]
+
+[node name="EurydiceBridge" instance=ExtResource("1_bjl2q")]
+script = ExtResource("2_pku4e")

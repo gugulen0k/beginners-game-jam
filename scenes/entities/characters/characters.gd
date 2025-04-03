@@ -5,7 +5,7 @@ extends Node3D
 
 
 func _physics_process(delta: float) -> void:
-	DebugUI.add_property('Orpheus InputSystem', InputSystem.can_use_orpheus)
+	#DebugUI.add_property('Orpheus InputSystem', InputSystem.can_use_orpheus)
 		
 	var movement_dir: float = Input.get_axis('move_left', 'move_right')
 	

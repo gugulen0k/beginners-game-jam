@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bj7vdjso2wjiy" path="res://scenes/entities/eurydice/eurydice.gd" id="1_8b2v8"]
 [ext_resource type="Texture2D" uid="uid://bo41o1sve15fh" path="res://2d_graphics/FullSpriteSheet.png" id="2_nugoo"]
-[ext_resource type="PackedScene" uid="uid://dbbg83x461143" path="res://scenes/entities/eurydice/eurydice_interactor.tscn" id="3_nugoo"]
+[ext_resource type="PackedScene" uid="uid://dbbg83x461143" path="res://scenes/entities/characters/player_interactor.tscn" id="3_nugoo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nugoo"]
 atlas = ExtResource("2_nugoo")
@@ -830,8 +830,8 @@ size = Vector3(0.05, 0.05, 0.5)
 radius = 0.56
 height = 3.41352
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_o50bt"]
-size = Vector3(1, 2.155, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_nugoo"]
+size = Vector3(1, 2.35, 1.285)
 
 [node name="Eurydice" type="CharacterBody3D"]
 collision_layer = 10
@@ -839,7 +839,7 @@ collision_mask = 6
 script = ExtResource("1_8b2v8")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0.267092, 0)
+transform = Transform3D(-3.27835e-08, 0, 0.75, 0, 0.75, 0, -0.75, 0, -3.27835e-08, 0, 0.267092, 0)
 sprite_frames = SubResource("SpriteFrames_yjtdl")
 animation = &"landing"
 autoplay = "idle"
@@ -873,17 +873,18 @@ mesh = SubResource("BoxMesh_wjyg5")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_8b2v8")
 
-[node name="EurydiceInteractor" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_nugoo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, -0.374, 0)
-player = NodePath("..")
-
-[node name="CollisionShape3D" parent="EurydiceInteractor" index="0"]
-shape = SubResource("BoxShape3D_o50bt")
-
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 light_color = Color(1, 0.709804, 0.184314, 1)
 light_energy = 5.0
 omni_range = 10.0
 omni_attenuation = 2.5
 
-[editable path="EurydiceInteractor"]
+[node name="PlayerInteractor" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_nugoo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.421099, -1.26831)
+collision_mask = 32
+player = NodePath("..")
+
+[node name="CollisionShape3D" parent="PlayerInteractor" index="0"]
+shape = SubResource("BoxShape3D_nugoo")
+
+[editable path="PlayerInteractor"]

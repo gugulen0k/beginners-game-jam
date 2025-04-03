@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://dp25p68flfxad"]
+
+[ext_resource type="Script" uid="uid://cw2o3gkr1crnd" path="res://scenes/user_interface/game_story/game_story.gd" id="1_ae1qf"]
+[ext_resource type="Theme" uid="uid://bcrem83sv3sbs" path="res://scenes/user_interface/global/main_theme.tres" id="1_pcwuw"]
+[ext_resource type="PackedScene" uid="uid://naeqc07b6qct" path="res://scenes/levels/level_1/level_1.tscn" id="2_464lr"]
+[ext_resource type="FontFile" uid="uid://ducgl27pcrf36" path="res://scenes/user_interface/global/fonts/caesar-dressing/CaesarDressing-B153.ttf" id="2_oa8qa"]
+[ext_resource type="AudioStream" uid="uid://cju6ryjgixh5p" path="res://audio/cave_ambience.mp3" id="4_ae1qf"]
+
+[node name="GameStory" type="Control" node_paths=PackedStringArray("play_btn")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ae1qf")
+play_btn = NodePath("MarginContainer/ColorRect/PlayButton")
+first_level_scene = ExtResource("2_464lr")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_pcwuw")
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 100
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_pcwuw")
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="MarginContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_pcwuw")
+theme_override_fonts/font = ExtResource("2_oa8qa")
+theme_override_font_sizes/font_size = 42
+text = "In the shadowy depths of the underworld, Orpheus and Eurydice stand united, their love a beacon in the endless night. Orpheus, with his lyre, has moved the very heart of Hades, securing a chance to bring Eurydice back to the world of the living. But their journey is far from over, for the underworld does not relinquish its claims so easily.
+
+The path before them is treacherous, filled with whispers of despair and the wails of lost souls. Orpheus leads the way, his music a shield against the darkness, each note a testament to his unyielding love. Eurydice follows, her presence a silent comfort, a promise of the life they will share once more under the sun.
+
+Yet, a cruel condition binds their escape: Orpheus must not look back at Eurydice until they have both crossed the threshold into the light. 
+As they near the exit, the weight of his promise grows heavier. The light of the living world beckons, but so does the urge to turn, to see her face one more time. Will Orpheus' faith in their love hold steadfast, or will a single, fateful glance condemn them both to an eternity apart?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="PlayButton" type="Button" parent="MarginContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -232.0
+offset_top = -109.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 64
+text = ">"
+
+[node name="CaveAmbience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ae1qf")

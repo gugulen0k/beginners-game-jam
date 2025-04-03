@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgnf0e8qjfutj"]
+
+[ext_resource type="Script" uid="uid://vgtbxxgqxtao" path="res://scenes/user_interface/game_finished/game_finished.gd" id="1_k24fs"]
+[ext_resource type="Theme" uid="uid://bcrem83sv3sbs" path="res://scenes/user_interface/global/main_theme.tres" id="3_1b5ep"]
+[ext_resource type="FontFile" uid="uid://ducgl27pcrf36" path="res://scenes/user_interface/global/fonts/caesar-dressing/CaesarDressing-B153.ttf" id="4_dgpto"]
+[ext_resource type="AudioStream" uid="uid://cwf84lq6c3glr" path="res://audio/main_theme.mp3" id="4_k24fs"]
+
+[node name="GameFinished" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k24fs")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_1b5ep")
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 100
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+theme = ExtResource("3_1b5ep")
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="RichTextLabel" parent="MarginContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+theme = ExtResource("3_1b5ep")
+theme_override_fonts/normal_font = ExtResource("4_dgpto")
+theme_override_font_sizes/normal_font_size = 86
+text = "Thanks for playing!
+♡"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_k24fs")

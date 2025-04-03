@@ -1,0 +1,379 @@
+[gd_scene load_steps=38 format=3 uid="uid://naeqc07b6qct"]
+
+[ext_resource type="Script" uid="uid://btga3hxw4vogx" path="res://scenes/levels/level_1/level_1.gd" id="1_fngju"]
+[ext_resource type="Shader" uid="uid://u2osdbsphxm5" path="res://shaders/prototype.gdshader" id="1_x3ahk"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_hhmec"]
+[ext_resource type="Script" uid="uid://crawhy8swiqjc" path="res://scenes/entities/characters/characters.gd" id="3_7uxs1"]
+[ext_resource type="PackedScene" uid="uid://d0k1u5nvwlxh7" path="res://scenes/entities/orpheus/orpheus.tscn" id="4_3lh42"]
+[ext_resource type="PackedScene" uid="uid://dsg4uckeyjsey" path="res://scenes/entities/eurydice/eurydice.tscn" id="5_vmhy7"]
+[ext_resource type="PackedScene" uid="uid://owsmcq5li7i0" path="res://scenes/user_interface/game_over/game_over.tscn" id="6_3lh42"]
+[ext_resource type="AudioStream" uid="uid://d20qt0xaeyc5s" path="res://audio/ingame_music_without_lyre.mp3" id="7_vmhy7"]
+[ext_resource type="PackedScene" uid="uid://btcjpjyatk44o" path="res://scenes/user_interface/level_finished/level_finished.tscn" id="10_w3g2g"]
+[ext_resource type="PackedScene" uid="uid://cjaun6rw4naar" path="res://graphics/Level1.glb" id="12_napug"]
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="13_wfdrs"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_ldw0e"]
+[ext_resource type="Texture2D" uid="uid://cv8f7hqqmvswu" path="res://graphics/backgroun_textures/asdaaa.png" id="15_rmnd1"]
+[ext_resource type="Script" uid="uid://b8hhnqsugykly" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="15_wfdrs"]
+[ext_resource type="Texture2D" uid="uid://dpjpd6vj6dyqw" path="res://graphics/backgroun_textures/asdaaa2.png" id="16_wloe5"]
+[ext_resource type="Texture2D" uid="uid://dhqfar55h5nuq" path="res://graphics/backgroun_textures/asdaaa3.png" id="17_8spg0"]
+
+[sub_resource type="Resource" id="Resource_hhmec"]
+script = ExtResource("14_ldw0e")
+duration = 1.0
+transition = 0
+ease = 0
+
+[sub_resource type="Resource" id="Resource_wfdrs"]
+script = ExtResource("15_wfdrs")
+keep_aspect = 1
+cull_mask = 1048575
+h_offset = 0.0
+v_offset = 0.0
+projection = 0
+fov = 25.0
+size = 1.0
+frustum_offset = Vector2(0, 0)
+near = 0.05
+far = 4000.0
+metadata/_custom_type_script = "uid://b8hhnqsugykly"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fngju"]
+sky_top_color = Color(0.937343, 0.82717, 0.71197, 1)
+sky_horizon_color = Color(0.175814, 0.208016, 0.354428, 1)
+sky_curve = 0.113679
+ground_bottom_color = Color(0.176471, 0.207843, 0.352941, 1)
+ground_horizon_color = Color(0.176471, 0.207843, 0.352941, 1)
+
+[sub_resource type="Sky" id="Sky_58uyj"]
+sky_material = SubResource("ProceduralSkyMaterial_fngju")
+
+[sub_resource type="Environment" id="Environment_5o1mp"]
+background_mode = 1
+background_color = Color(0.0195034, 0.0407348, 0.067748, 1)
+sky = SubResource("Sky_58uyj")
+ambient_light_source = 2
+ambient_light_color = Color(0.0336604, 0.0629804, 0.097307, 1)
+ambient_light_energy = 16.0
+tonemap_mode = 2
+glow_enabled = true
+glow_bloom = 0.2
+fog_enabled = true
+fog_light_color = Color(0.0823529, 0.188235, 0.278431, 1)
+fog_light_energy = 0.35
+fog_sky_affect = 0.95
+fog_height = 8.15
+fog_height_density = 0.15
+fog_depth_curve = 0.90125
+adjustment_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3g2g"]
+render_priority = 0
+shader = ExtResource("1_x3ahk")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 5
+shader_parameter/base_color = Color(0.0646965, 0.0646965, 0.0646965, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 5.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 10.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = true
+shader_parameter/checkered_color = Color(0.321728, 0.321728, 0.321728, 1)
+shader_parameter/checkered_blend_color = 0.66
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_spwf2"]
+material = SubResource("ShaderMaterial_w3g2g")
+size = Vector3(3, 0.5, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7uxs1"]
+size = Vector3(3, 0.5, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hhmec"]
+size = Vector3(6.05908, 1, 3.33344)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wfdrs"]
+size = Vector3(11.9965, 1, 3.33344)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wloe5"]
+size = Vector3(8.6319, 1, 3.33344)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8spg0"]
+size = Vector3(1.7693, 1, 3.33344)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5d3u7"]
+size = Vector3(1.01386, 18.1558, 5.22112)
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_hhmec"]
+map_width = 7
+map_depth = 3
+map_data = PackedFloat32Array(-1, -0.45, -0.1, 0, -0.1, -0.45, -1, -1, -0.45, -0.1, 0, -0.1, -0.45, -1, -1, -0.45, -0.1, 0, -0.1, -0.45, -1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ldw0e"]
+size = Vector3(5.15121, 1, 3.33344)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_41r28"]
+size = Vector3(0.850271, 9.75586, 3.33344)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rmnd1"]
+size = Vector3(44.1586, 1, 3.33344)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rmnd1"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wloe5"]
+material = SubResource("StandardMaterial3D_rmnd1")
+size = Vector2(22.215, 18.28)
+orientation = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wloe5"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8spg0"]
+material = SubResource("StandardMaterial3D_wloe5")
+size = Vector2(90.17, 18.28)
+orientation = 2
+
+[node name="Level1" type="Node3D" node_paths=PackedStringArray("game_over_scene", "level_finished_scene", "level_finish", "level_finish_marker", "level_music")]
+script = ExtResource("1_fngju")
+game_over_scene = NodePath("GameOver")
+level_finished_scene = NodePath("LevelFinished")
+level_finish = NodePath("FinishZone")
+level_finish_marker = NodePath("FinishZone/Marker3D")
+level_music = NodePath("LevelMusic")
+
+[node name="PhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_targets")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999994, -4.75937, 8.20645, 56.3648)
+top_level = true
+script = ExtResource("13_wfdrs")
+follow_mode = 3
+follow_targets = [NodePath("../Characters/Eurydice"), NodePath("../Characters/Orpheus")]
+look_at_mode = 3
+tween_resource = SubResource("Resource_hhmec")
+tween_on_load = false
+camera_3d_resource = SubResource("Resource_wfdrs")
+follow_offset = Vector3(0, 0, 53.61)
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+physics_interpolation_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75937, 8.20645, 56.3648)
+fov = 25.0
+
+[node name="PhantomCameraHost" type="Node" parent="Camera3D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("2_hhmec")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5o1mp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -1.35106e-15, -0.707107, 0.707107, 1.35106e-15, 0.707107, 1.26218e-29, -1, 1.91069e-15, 0, 23.0984, 0)
+light_color = Color(0.56953, 0.606005, 0.756581, 1)
+
+[node name="FinishZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5045, 6.80644, 1.27609)
+collision_layer = 3
+collision_mask = 3
+
+[node name="Marker3D" type="Marker3D" parent="FinishZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.207183, 0)
+
+[node name="FinishZone" type="CSGMesh3D" parent="FinishZone"]
+visible = false
+mesh = SubResource("BoxMesh_spwf2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FinishZone"]
+shape = SubResource("BoxShape3D_7uxs1")
+
+[node name="Characters" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.14032, 8.28924, 2.22936)
+script = ExtResource("3_7uxs1")
+
+[node name="Orpheus" parent="Characters" node_paths=PackedStringArray("level") instance=ExtResource("4_3lh42")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.130093, -0.308492)
+level = NodePath("../..")
+
+[node name="Eurydice" parent="Characters" instance=ExtResource("5_vmhy7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.23811, -0.0354795, -0.640673)
+
+[node name="GameOver" parent="." instance=ExtResource("6_3lh42")]
+visible = false
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_vmhy7")
+
+[node name="LevelFinished" parent="." instance=ExtResource("10_w3g2g")]
+visible = false
+
+[node name="Level1" parent="." instance=ExtResource("12_napug")]
+transform = Transform3D(0.46, 0, 0, 0, 0.46, 0, 0, 0, 0.46, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.00164905, -0.743351, 0.6689, -0.597004, 0.535886, 0.597003, -0.802237, -0.40032, -0.442899, 7, 21.8051, -12)
+light_color = Color(0.132672, 0.382296, 0.51412, 1)
+light_energy = 150.0
+spot_range = 58.5702
+spot_angle = 25.9068
+spot_angle_attenuation = 0.5
+
+[node name="CrystalLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.32776, 7.65484, -1)
+light_color = Color(0.0941176, 0.909804, 0.678431, 1)
+light_energy = 10.0
+omni_range = 4.0
+omni_attenuation = 3.5
+
+[node name="CrystalLight2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.3912, 9.04374, -1.63936)
+light_color = Color(0.0941176, 0.909804, 0.678431, 1)
+light_energy = 5.0
+omni_range = 2.172
+omni_attenuation = 2.5
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5826, 6.08967, 1.2036)
+collision_layer = 12
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_hhmec")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.35842, 6.08967, 1.2036)
+collision_layer = 12
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.96869, 0, 0)
+shape = SubResource("BoxShape3D_wfdrs")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.25244, 6.08967, 1.2036)
+collision_layer = 12
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28641, 0, 0)
+shape = SubResource("BoxShape3D_wloe5")
+
+[node name="StaticBody3D6" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.65, 6.08967, 1.2036)
+collision_layer = 12
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.60996, 0, 0)
+shape = SubResource("BoxShape3D_8spg0")
+
+[node name="RightBorder" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.65, 8.2617, 1.2036)
+collision_layer = 12
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RightBorder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.196684, 0.594971, 0.455971)
+shape = SubResource("BoxShape3D_5d3u7")
+
+[node name="LeftBorder" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.8765, 8.2617, 1.13308)
+collision_layer = 12
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftBorder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.196684, 0.594971, 0.455971)
+shape = SubResource("BoxShape3D_5d3u7")
+
+[node name="Bridge" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5556, 6.08967, 1.2036)
+collision_layer = 9
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bridge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59786, 0.365002)
+shape = SubResource("HeightMapShape3D_hhmec")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4912, 6.08967, 1.2036)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.477524, 0, 0)
+shape = SubResource("BoxShape3D_ldw0e")
+
+[node name="StaticBody3D7" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.554049, 11.627, 1.2036)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.210277, -0.21875, 0)
+shape = SubResource("BoxShape3D_41r28")
+
+[node name="BottomBorder" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4912, 0.407813, 1.2036)
+collision_layer = 12
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BottomBorder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8537, 0, 0)
+shape = SubResource("BoxShape3D_rmnd1")
+
+[node name="TopBorder" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4912, 17.077, 1.2036)
+collision_layer = 12
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TopBorder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8537, 0, 0)
+shape = SubResource("BoxShape3D_rmnd1")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5167, 11.8784, -0.207078)
+light_color = Color(0.686446, 0.40688, 0.196218, 1)
+omni_range = 8.09428
+omni_attenuation = 0.0
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(3.53, 0, 0, 0, 3.53, 0, 0, 0, 3.53, -2.87773, 8.36579, -7.4997)
+texture = ExtResource("15_rmnd1")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(3.53, 0, 0, 0, 3.53, 0, 0, 0, 3.53, -12.104, 8.36579, -10.1879)
+texture = ExtResource("16_wloe5")
+
+[node name="Sprite3D3" type="Sprite3D" parent="."]
+transform = Transform3D(3.53, 0, 0, 0, 3.53, 0, 0, 0, 3.53, -18.5157, 8.36579, -11.4539)
+texture = ExtResource("17_8spg0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.8282, 8.90185, 4.46234)
+mesh = SubResource("PlaneMesh_wloe5")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.130962, 27.0429, 4.46234)
+mesh = SubResource("PlaneMesh_8spg0")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.130962, -9.2689, 4.46234)
+mesh = SubResource("PlaneMesh_8spg0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.1425, 8.84869, 4.46234)
+mesh = SubResource("PlaneMesh_wloe5")
+
+[connection signal="body_entered" from="FinishZone" to="." method="_on_finish_zone_body_entered"]
+
+[editable path="LevelFinished"]

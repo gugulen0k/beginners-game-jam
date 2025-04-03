@@ -12,14 +12,10 @@ extends Character
 
 const RAY_LENGTH: int = 50
 const RAYS_COUNT: int = 3
-const SETTLE_ANIMATION_SPEED: float = 2
+const SETTLE_ANIMATION_SPEED: float = 1
 
 var is_eurydice_detected: bool = false
-
-
-func _ready() -> void:
-	super._ready()
-	transform.basis = Basis.looking_at(Vector3.RIGHT)
+var can_interrupt: Array[State] = [State.IDLE, State.WALKING]  # States that can be interrupted
 
 
 func _physics_process(delta: float) -> void:
@@ -27,10 +23,11 @@ func _physics_process(delta: float) -> void:
 	
 	#DebugUI.add_property('Orpheus movement dir', movement_direction)
 	#DebugUI.add_property('Orpheus velocity X', velocity.x)
-	DebugUI.add_property('Current animation', orpheus_character.get_anim_state())
-	DebugUI.add_property("Orpheus current state", State.keys()[current_state])
-	DebugUI.add_property("Orpheus previous state", State.keys()[previous_state])
-	DebugUI.add_property("On floor", is_on_floor())
+	#DebugUI.add_property('Orpheus is in transition', is_in_transition)
+	#DebugUI.add_property('Current animation', orpheus_character.get_anim_state())
+	#DebugUI.add_property("Orpheus current state", State.keys()[current_state])
+	#DebugUI.add_property("Orpheus previous state", State.keys()[previous_state])
+	#DebugUI.add_property("On floor", is_on_floor())
 	
 	if can_perform_actions():
 		handle_movement()
@@ -62,16 +59,6 @@ func play_state_animation():
 			orpheus_character.set_anim_state("lyre")
 		State.LYRE_TAKEOUT:
 			orpheus_character.set_anim_state("lyre_takeout")
-		State.LANDING:
-			is_in_landing_animation = true
-			#orpheus_character.set_anim_state("landing")
-			#await orpheus_character.stop_animation()
-			is_in_landing_animation = false
-			
-			# Update state after landing animation
-			update_state()
-			play_state_animation()  # Play new state's animation
-
 
 
 func line(pos1: Vector3, pos2: Vector3, color = Color.WHITE_SMOKE, persist_ms = 1):
@@ -148,10 +135,6 @@ func move_into_final_area_position(marker_3d: Marker3D) -> void:
 	InputSystem.can_use_orpheus = false
 	InputSystem.can_use_eurydice = false
 	
-	print('current_state before: ' + str(current_state))
-	current_state = State.WALKING
-	print('current_state after: ' + str(current_state))
-	
 	var tween = get_tree().create_tween()
 	# will change the global position to the marker 3d global position over the SETTLE_ANIMATION_SPEED in seconds
 	tween.tween_property(self, "global_position", marker_3d.global_position + (global_position - $Feet.global_position), SETTLE_ANIMATION_SPEED)
@@ -162,8 +145,6 @@ func move_into_final_area_position(marker_3d: Marker3D) -> void:
 
 func on_move_into_final_area_finished() -> void:
 	transform.basis = transform.basis.looking_at(Vector3.LEFT)
-	current_state = State.LYRE_TAKEOUT
-	print('current_state play_lyre: ' + str(current_state))
 	
 	InputSystem.can_use_eurydice = true
 	InputSystem.can_use_orpheus = false

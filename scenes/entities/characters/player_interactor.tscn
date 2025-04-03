@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbbg83x461143"]
+
+[ext_resource type="Script" uid="uid://cgo2a2sbgg6ly" path="res://scenes/entities/characters/player_interactor.gd" id="1_dpvnb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nl6nv"]
+
+[node name="PlayerInteractor" type="Area3D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_dpvnb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_nl6nv")

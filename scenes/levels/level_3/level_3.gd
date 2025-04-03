@@ -1,12 +1,30 @@
 extends Node3D
 
+@export_category('Models')
+@export var level_model: Node3D
+
+@export_category('UI Scenes')
 @export var game_over_scene: Control
 @export var level_finished_scene: Control
 
+@export_category('Level Finish')
 @export var level_finish: Area3D
 @export var level_finish_marker: Marker3D
 
+@export_category('Music')
 @export var level_music: AudioStreamPlayer
+@export var level_music_lyre: AudioStreamPlayer
+@export var game_over_music: AudioStreamPlayer
+@export var level_finished_music: AudioStreamPlayer
+@export var cave_ambience: AudioStreamPlayer
+
+@onready var orpheus_gate: StaticBody3D = $OrpheusGate
+@onready var eurydice_bridge: StaticBody3D = $EurydiceBridge
+@onready var bridge: Node3D = $Bridge
+
+var is_orpheus_gate_opened: bool = false
+var is_eurydice_bridge_opened: bool = false
+var level_finished: bool = false
 
 signal game_over
 
@@ -14,33 +32,51 @@ signal game_over
 func _ready() -> void:
 	game_over.connect(_on_game_over)
 	level_music.play() # Enable level music
+	level_music_lyre.volume_linear = 0
+	level_music_lyre.play()
+	cave_ambience.volume_linear = 0.5
+	cave_ambience.play()
 	
 	# ----- Enable movement for both characters ----
 	InputSystem.can_use_eurydice = true
 	InputSystem.can_use_orpheus = true
 	#-----------------------------------------------
+	
+	# ----- Enable movement for both characters ----
+	LevelsInfo.level_3['is_gate_open'] = false
+	LevelsInfo.level_3['is_bridge_open'] = false
+	# ----------------------------------------------
 
 	set_siglans_for_ui_btns()
 
 
 func _physics_process(delta: float) -> void:
-	DebugUI.add_property('Characters on finish', level_finish.get_overlapping_bodies())
+	#DebugUI.add_property('Characters on finish', level_finish.get_overlapping_bodies())
 	
 	var characters_on_finish := level_finish.get_overlapping_bodies()
 	
-	if characters_on_finish.size() == 2:
+	if characters_on_finish.size() == 2 and !level_finished:
+		level_finished = true
+		
 		# ----- Disable movement for both characters ----
 		InputSystem.can_use_eurydice = false
 		InputSystem.can_use_orpheus = false
 		# -----------------------------------------------
 		
+		level_music.stop()
+		level_music_lyre.stop()
 		level_finished_scene.show()
+		level_finished_music.play()
+		
+	if LevelsInfo.level_3['is_gate_open'] and !is_orpheus_gate_opened:
+		orpheus_gate.collision_layer = 0
+		level_model.play_open_orpheus_gate_anim()
+		is_orpheus_gate_opened = true
 
-
-func _on_area_3d_body_entered(character: Character) -> void:
-	if character is Orpheus:
-		character.move_into_final_area_position(level_finish_marker)
-
+	if LevelsInfo.level_3['is_bridge_open'] and !is_eurydice_bridge_opened:
+		eurydice_bridge.collision_layer = 0
+		bridge.play_open_eurydice_bridge_anim()
+		is_eurydice_bridge_opened = true
 
 func _on_game_over() -> void:
 	# ----- Disable movement for both characters ----
@@ -48,9 +84,12 @@ func _on_game_over() -> void:
 	InputSystem.can_use_orpheus = false
 	# -----------------------------------------------
 	
-	game_over_scene.show() # Show game over UI
 	level_music.stop() # Stop the level music
-	# [TODO] Play game over music
+	level_music_lyre.stop()
+	
+	game_over_scene.show() # Show game over UI
+	game_over_music.play()
+	
 
 func _on_main_menu_pressed() -> void:
 	var main_menu_scene = GlobalScenes.get_scene(GlobalScenes.SceneNames.MAIN_MENU)
@@ -79,18 +118,16 @@ func _on_try_again_pressed() -> void:
 func set_siglans_for_ui_btns() -> void:
 	# ----- Get buttons from UI scenes & assign signals -----
 	# GameOver UI buttons
-	var go_main_menu_btn = game_over_scene.main_menu_btn
 	var go_try_again_btn = game_over_scene.try_again_btn
-	var go_select_level_btn = game_over_scene.select_level_btn
-	
 	go_try_again_btn.pressed.connect(_on_try_again_pressed)
-	go_main_menu_btn.pressed.connect(_on_main_menu_pressed)
-	go_select_level_btn.pressed.connect(_on_select_level_pressed)
 	
 	# LevelFinished UI buttons
-	var lf_main_menu_btn = level_finished_scene.main_menu_btn
 	var lf_next_level_btn = level_finished_scene.next_level_btn
-	
-	lf_main_menu_btn.pressed.connect(_on_main_menu_pressed)
 	lf_next_level_btn.pressed.connect(_on_next_level_pressed)
 	# --------------------------------------------------------------
+
+
+func _on_finish_zone_body_entered(character: Character) -> void:
+	if character is Orpheus:
+		level_music_lyre.volume_linear = 1
+		character.move_into_final_area_position(level_finish_marker)

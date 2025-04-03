@@ -1,11 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0k1u5nvwlxh7"]
+[gd_scene load_steps=6 format=3 uid="uid://d0k1u5nvwlxh7"]
 
 [ext_resource type="Script" uid="uid://dva08t1ymq557" path="res://scenes/entities/orpheus/orpheus.gd" id="1_jpkvy"]
 [ext_resource type="PackedScene" uid="uid://byf7hsmmfacf6" path="res://scenes/entities/orpheus/orpheus_character.tscn" id="2_jpkvy"]
+[ext_resource type="PackedScene" uid="uid://dbbg83x461143" path="res://scenes/entities/characters/player_interactor.tscn" id="3_bdx86"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jpkvy"]
 radius = 0.620056
 height = 3.44507
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bdx86"]
+size = Vector3(1, 2.5, 1.29102)
 
 [node name="Orpheus" type="CharacterBody3D"]
 collision_mask = 5
@@ -39,3 +43,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02833, 0)
 light_energy = 0.2
 omni_range = 10.0
 omni_attenuation = 0.0
+
+[node name="PlayerInteractor" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_bdx86")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.213303, -1.36647)
+collision_mask = 16
+player = NodePath("..")
+
+[node name="CollisionShape3D" parent="PlayerInteractor" index="0"]
+shape = SubResource("BoxShape3D_bdx86")
+
+[editable path="PlayerInteractor"]

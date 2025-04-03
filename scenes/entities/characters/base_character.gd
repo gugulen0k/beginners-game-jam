@@ -35,6 +35,7 @@ var previous_state: State = State.IDLE
 var was_on_floor: bool = true
 var just_landed: bool = false  # New flag for landing detection
 var is_in_landing_animation: bool = false  # Track if we're in landing animation
+var is_in_transition: bool = false  # For manual animation control
 
 var jump_gravity = ProjectSettings.get_setting('physics/3d/default_gravity')
 var fall_gravity: float
@@ -42,6 +43,7 @@ var fall_gravity: float
 
 func _ready() -> void:
 	calculate_movement_parameters()
+	transform.basis = Basis.looking_at(Vector3.RIGHT)
 
 
 func _physics_process(delta: float) -> void:
@@ -82,9 +84,6 @@ func stop() -> void:
 
 
 func update_state() -> void:
-	if not is_able_to_perform_actions:
-		return
-		
 	if is_in_landing_animation:
 		return  # Don't change state during landing animation
 		
@@ -98,6 +97,9 @@ func update_state() -> void:
 	elif is_moving():
 		current_state = State.WALKING
 	else:
+		current_state = State.IDLE
+		
+	if not is_able_to_perform_actions:
 		current_state = State.IDLE
 
 func handle_jumping(delta: float) -> void:

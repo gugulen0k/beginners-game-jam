@@ -21,6 +21,7 @@ GlobalScenes="*res://global_scripts/global_scenes/global_scenes.tscn"
 SceneLoading="*res://global_scripts/scene_loading.gd"
 InputSystem="*res://global_scripts/input_system.gd"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+LevelsInfo="*res://global_scripts/levels_info.gd"
 
 [display]
 
@@ -63,7 +64,8 @@ interact={
 3d_physics/layer_2="eurydice"
 3d_physics/layer_3="character"
 3d_physics/layer_4="raycast_hittable"
-3d_physics/layer_5="interactable"
+3d_physics/layer_5="orpheus_interactable"
+3d_physics/layer_6="eurydice_interactable"
 
 [physics]
 

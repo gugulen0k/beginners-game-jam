@@ -53,5 +53,7 @@ func handle_rotation() -> void:
 	if is_moving():
 		var base_scale = .75
 		
-		var tween = get_tree().create_tween()
-		tween.tween_property(animated_sprite, 'scale:x', base_scale * (-1 if movement_direction < 0 else 1), 0.1)
+		#var tween = get_tree().create_tween()
+		#tween.tween_property(animated_sprite, 'scale:x', base_scale * (-1 if movement_direction < 0 else 1), 0.1)
+		
+		transform.basis = Basis.looking_at(Vector3(movement_direction, 0, 0))
